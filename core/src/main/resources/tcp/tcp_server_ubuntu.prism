@@ -1,0 +1,3767 @@
+mdp
+
+// This TCP model used in the evaluation is based on a translation 
+// of the Ubuntu TCP-server model learned by Paul Fiterau-Brostean and others.
+// (available at http://automata.cs.ru.nl/BenchmarkTCP/Mealy)
+
+const int BOUND = 40;
+module tcp_server_ubuntu_mut
+steps : [0..BOUND] init 0;
+state : [0..156] init 19;
+[CLOSECONNECTION] state = 0 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 0 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 0 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 0 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 0 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 0 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 0 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 0 ->
+1.000000 : (state'=21) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 0 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 0 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 0 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 0 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 1 ->
+1.000000 : (state'=75) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 1 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 1 ->
+1.000000 : (state'=37) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 1 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 1 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 1 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 1 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 1 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 1 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 1 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 1 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 1 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 2 ->
+1.000000 : (state'=75) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 2 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=31) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 2 ->
+1.000000 : (state'=2) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 2 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 2 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 2 ->
+0.900000 : (state'=125) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 2 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 2 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 2 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 2 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 2 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 2 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 3 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 3 ->
+1.000000 : (state'=100) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 3 ->
+1.000000 : (state'=3) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 3 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 3 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 3 ->
+1.000000 : (state'=100) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 3 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 3 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 3 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 3 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 3 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 3 ->
+1.000000 : (state'=100) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 4 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 4 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 4 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 4 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 4 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 4 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 4 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 4 ->
+1.000000 : (state'=4) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 4 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 4 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 4 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 4 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 5 ->
+1.000000 : (state'=39) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 5 ->
+0.900000 : (state'=133) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 5 ->
+1.000000 : (state'=5) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 5 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 5 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 5 ->
+0.900000 : (state'=40) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 5 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 5 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 5 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 5 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 5 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 5 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 6 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 6 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 6 ->
+1.000000 : (state'=138) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 6 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 6 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 6 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 6 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 6 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 6 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 6 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 6 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 6 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 7 ->
+1.000000 : (state'=155) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 7 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=50) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 7 ->
+1.000000 : (state'=13) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 7 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 7 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 7 ->
+0.900000 : (state'=140) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 7 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 7 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 7 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 7 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 7 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 7 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 8 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 8 ->
+0.900000 : (state'=74) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 8 ->
+1.000000 : (state'=8) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 8 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 8 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 8 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=49) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 8 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 8 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 8 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 8 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 8 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 8 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 9 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 9 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=45) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 9 ->
+1.000000 : (state'=132) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 9 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 9 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 9 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=92) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 9 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 9 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 9 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 9 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 9 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 9 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 10 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 10 ->
+0.900000 : (state'=101) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 10 ->
+1.000000 : (state'=142) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 10 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 10 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 10 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=53) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 10 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 10 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 10 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 10 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 10 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 10 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 11 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 11 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 11 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 11 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 11 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 11 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 11 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 11 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 11 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 11 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 11 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 11 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 12 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 12 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 12 ->
+1.000000 : (state'=104) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 12 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 12 ->
+1.000000 : (state'=150) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 12 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 12 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 12 ->
+1.000000 : (state'=54) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 12 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 12 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 12 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 12 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 13 ->
+1.000000 : (state'=155) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 13 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=50) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 13 ->
+1.000000 : (state'=13) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 13 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 13 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 13 ->
+0.900000 : (state'=140) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 13 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 13 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 13 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 13 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 13 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 13 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 14 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 14 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 14 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 14 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 14 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 14 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 14 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 14 ->
+1.000000 : (state'=29) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 14 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 14 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 14 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 14 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 15 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 15 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 15 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 15 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 15 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 15 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 15 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 15 ->
+1.000000 : (state'=152) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 15 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 15 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 15 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 15 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 16 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 16 ->
+0.900000 : (state'=85) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 16 ->
+1.000000 : (state'=16) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 16 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 16 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 16 ->
+0.900000 : (state'=127) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 16 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 16 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 16 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 16 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 16 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 16 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 17 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 17 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 17 ->
+1.000000 : (state'=138) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 17 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 17 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 17 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 17 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 17 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 17 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 17 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 17 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 17 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 18 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 18 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 18 ->
+1.000000 : (state'=99) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 18 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 18 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 18 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 18 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 18 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 18 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 18 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 18 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 18 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 19 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 19 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 19 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 19 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 19 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 19 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 19 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 19 ->
+1.000000 : (state'=34) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 19 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 19 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 19 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 19 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 20 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 20 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 20 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 20 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 20 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 20 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 20 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 20 ->
+1.000000 : (state'=78) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 20 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 20 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 20 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 20 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 21 ->
+1.000000 : (state'=137) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 21 ->
+0.900000 : (state'=31) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 21 ->
+1.000000 : (state'=58) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 21 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 21 ->
+1.000000 : (state'=55) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 21 ->
+0.900000 : (state'=40) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 21 ->
+1.000000 : (state'=55) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 21 ->
+1.000000 : (state'=131) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 21 ->
+1.000000 : (state'=55) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 21 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 21 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 21 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 22 ->
+1.000000 : (state'=137) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 22 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=45) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 22 ->
+1.000000 : (state'=88) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 22 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 22 ->
+1.000000 : (state'=129) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 22 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=92) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 22 ->
+1.000000 : (state'=129) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 22 ->
+1.000000 : (state'=28) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 22 ->
+1.000000 : (state'=129) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 22 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 22 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 22 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 23 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 23 ->
+1.000000 : (state'=47) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 23 ->
+1.000000 : (state'=47) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 23 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 23 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 23 ->
+0.900000 : (state'=112) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 23 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 23 ->
+1.000000 : (state'=4) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 23 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 23 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 23 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 23 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 24 ->
+1.000000 : (state'=51) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 24 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 24 ->
+1.000000 : (state'=24) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 24 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 24 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 24 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 24 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 24 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 24 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 24 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 24 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 24 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 25 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 25 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 25 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 25 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 25 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 25 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 25 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 25 ->
+1.000000 : (state'=152) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 25 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 25 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 25 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 25 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 26 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 26 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 26 ->
+1.000000 : (state'=81) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 26 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 26 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 26 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 26 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 26 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 26 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 26 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 26 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 26 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 27 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 27 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 27 ->
+1.000000 : (state'=126) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 27 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 27 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 27 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 27 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 27 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 27 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 27 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 27 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 27 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 28 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 28 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 28 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 28 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 28 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 28 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 28 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 28 ->
+1.000000 : (state'=22) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 28 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 28 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 28 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 28 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 29 ->
+1.000000 : (state'=79) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 29 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=101) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 29 ->
+1.000000 : (state'=115) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 29 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 29 ->
+1.000000 : (state'=150) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 29 ->
+0.900000 : (state'=52) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 29 ->
+1.000000 : (state'=150) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 29 ->
+1.000000 : (state'=111) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 29 ->
+1.000000 : (state'=150) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 29 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 29 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 29 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 30 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 30 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 30 ->
+1.000000 : (state'=30) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 30 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 30 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 30 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 30 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 30 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 30 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 30 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 30 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 30 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 31 ->
+1.000000 : (state'=75) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 31 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=31) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 31 ->
+1.000000 : (state'=2) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 31 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 31 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 31 ->
+0.900000 : (state'=125) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 31 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 31 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 31 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 31 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 31 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 31 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 32 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 32 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 32 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 32 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 32 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 32 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 32 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 32 ->
+1.000000 : (state'=148) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 32 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 32 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 32 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 32 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 33 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 33 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 33 ->
+1.000000 : (state'=128) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 33 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 33 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 33 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 33 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 33 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 33 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 33 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 33 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 33 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 34 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 34 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 34 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 34 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 34 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 34 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 34 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 34 ->
+1.000000 : (state'=34) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 34 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 34 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 34 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 34 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 35 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 35 ->
+1.000000 : (state'=47) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 35 ->
+1.000000 : (state'=96) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 35 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 35 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 35 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=112) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 35 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 35 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 35 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 35 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 35 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 35 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 36 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 36 ->
+0.900000 : (state'=85) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 36 ->
+1.000000 : (state'=16) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 36 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 36 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 36 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=127) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 36 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 36 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 36 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 36 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 36 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 36 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 37 ->
+1.000000 : (state'=75) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 37 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 37 ->
+1.000000 : (state'=37) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 37 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 37 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 37 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 37 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 37 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 37 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 37 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 37 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 37 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 38 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 38 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 38 ->
+1.000000 : (state'=38) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 38 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 38 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 38 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 38 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 38 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 38 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 38 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 38 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 38 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 39 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 39 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 39 ->
+1.000000 : (state'=67) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 39 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 39 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 39 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=46) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 39 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 39 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 39 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 39 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 39 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 39 ->
+1.000000 : (state'=105) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 40 ->
+1.000000 : (state'=51) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 40 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 40 ->
+1.000000 : (state'=24) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 40 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 40 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 40 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 40 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 40 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 40 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 40 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 40 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 40 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 41 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 41 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 41 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 41 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 41 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 41 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 41 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 41 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 41 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 41 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 41 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 41 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 42 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 42 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 42 ->
+1.000000 : (state'=43) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 42 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 42 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 42 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 42 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 42 ->
+1.000000 : (state'=135) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 42 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 42 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 42 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 42 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 43 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 43 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 43 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 43 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 43 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 43 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 43 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 43 ->
+1.000000 : (state'=78) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 43 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 43 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 43 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 43 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 44 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 44 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 44 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 44 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 44 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 44 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 44 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 44 ->
+1.000000 : (state'=4) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 44 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 44 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 44 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 44 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 45 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 45 ->
+0.900000 : (state'=45) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 45 ->
+1.000000 : (state'=118) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 45 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 45 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 45 ->
+0.900000 : (state'=26) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 45 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 45 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 45 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 45 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 45 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 45 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 46 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 46 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 46 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 46 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 46 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 46 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 46 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 46 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 46 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 46 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 46 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 46 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 47 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 47 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 47 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 47 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 47 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 47 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 47 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 47 ->
+1.000000 : (state'=4) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 47 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 47 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 47 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 47 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 48 ->
+1.000000 : (state'=39) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 48 ->
+0.900000 : (state'=31) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 48 ->
+1.000000 : (state'=91) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 48 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 48 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 48 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=40) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 48 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 48 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 48 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 48 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 48 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 48 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 49 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 49 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 49 ->
+1.000000 : (state'=110) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 49 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 49 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 49 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 49 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 49 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 49 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 49 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 49 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 49 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 50 ->
+1.000000 : (state'=155) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 50 ->
+0.900000 : (state'=102) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 50 ->
+1.000000 : (state'=107) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 50 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 50 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 50 ->
+0.900000 : (state'=140) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 50 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 50 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 50 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 50 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 50 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 50 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 51 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 51 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 51 ->
+1.000000 : (state'=126) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 51 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 51 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 51 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 51 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 51 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 51 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 51 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 51 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 51 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 52 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 52 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 52 ->
+1.000000 : (state'=128) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 52 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 52 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 52 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 52 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 52 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 52 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 52 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 52 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 52 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 53 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 53 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 53 ->
+1.000000 : (state'=30) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 53 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 53 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 53 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 53 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 53 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 53 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 53 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 53 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 53 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 54 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 54 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 54 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 54 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 54 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 54 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 54 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 54 ->
+1.000000 : (state'=12) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 54 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 54 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 54 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 54 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 55 ->
+1.000000 : (state'=137) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 55 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=31) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 55 ->
+1.000000 : (state'=58) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 55 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 55 ->
+1.000000 : (state'=55) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 55 ->
+0.900000 : (state'=40) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 55 ->
+1.000000 : (state'=55) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 55 ->
+1.000000 : (state'=131) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 55 ->
+1.000000 : (state'=55) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 55 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 55 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 55 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 56 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 56 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 56 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 56 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 56 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 56 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 56 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 56 ->
+1.000000 : (state'=4) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 56 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 56 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 56 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 56 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 57 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 57 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 57 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 57 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 57 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 57 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 57 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 57 ->
+1.000000 : (state'=12) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 57 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 57 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 57 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 57 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 58 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 58 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 58 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 58 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 58 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 58 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 58 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 58 ->
+1.000000 : (state'=21) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 58 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 58 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 58 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 58 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 59 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 59 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 59 ->
+1.000000 : (state'=38) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 59 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 59 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 59 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 59 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 59 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 59 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 59 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 59 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 59 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 60 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 60 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=101) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 60 ->
+1.000000 : (state'=153) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 60 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 60 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 60 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=52) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 60 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 60 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 60 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 60 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 60 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 60 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 61 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 61 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 61 ->
+1.000000 : (state'=114) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 61 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 61 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 61 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 61 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 61 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 61 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 61 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 61 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 61 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 62 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 62 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=45) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 62 ->
+1.000000 : (state'=118) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 62 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 62 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 62 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=26) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 62 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 62 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 62 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 62 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 62 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 62 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 63 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 63 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 63 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 63 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 63 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 63 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 63 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 63 ->
+1.000000 : (state'=29) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 63 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 63 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 63 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 63 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 64 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 64 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 64 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 64 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 64 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 64 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 64 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 64 ->
+1.000000 : (state'=64) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 64 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 64 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 64 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 64 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 65 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 65 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 65 ->
+1.000000 : (state'=110) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 65 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 65 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 65 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 65 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 65 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 65 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 65 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 65 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 65 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 66 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 66 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 66 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 66 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 66 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 66 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 66 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 66 ->
+1.000000 : (state'=4) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 66 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 66 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 66 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 66 ->
+1.000000 : (state'=44) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 67 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 67 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 67 ->
+1.000000 : (state'=67) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 67 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 67 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 67 ->
+0.900000 : (state'=46) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 67 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 67 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 67 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 67 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 67 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 67 ->
+1.000000 : (state'=105) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 68 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 68 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 68 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 68 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 68 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 68 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 68 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 68 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 68 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 68 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 68 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 68 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 69 ->
+1.000000 : (state'=155) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 69 ->
+0.900000 : (state'=102) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 69 ->
+1.000000 : (state'=107) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 69 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 69 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 69 ->
+0.900000 : (state'=140) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 69 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 69 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 69 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 69 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 69 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 69 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 70 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 70 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 70 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 70 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 70 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 70 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 70 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 70 ->
+1.000000 : (state'=34) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 70 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 70 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 70 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 70 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 71 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 71 ->
+1.000000 : (state'=58) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 71 ->
+1.000000 : (state'=71) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 71 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 71 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 71 ->
+0.900000 : (state'=151) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 71 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 71 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 71 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 71 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 71 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 71 ->
+1.000000 : (state'=108) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 72 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 72 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 72 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 72 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 72 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 72 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 72 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 72 ->
+1.000000 : (state'=152) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 72 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 72 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 72 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 72 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 73 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 73 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 73 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 73 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 73 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 73 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 73 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 73 ->
+1.000000 : (state'=148) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 73 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 73 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 73 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 73 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 74 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 74 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=74) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 74 ->
+1.000000 : (state'=93) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 74 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 74 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 74 ->
+0.900000 : (state'=59) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 74 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 74 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 74 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 74 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 74 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 74 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 75 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 75 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 75 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 75 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 75 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 75 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 75 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 75 ->
+1.000000 : (state'=148) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 75 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 75 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 75 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 75 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 76 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 76 ->
+0.900000 : (state'=74) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 76 ->
+1.000000 : (state'=8) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 76 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 76 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 76 ->
+0.900000 : (state'=49) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 76 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 76 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 76 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 76 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 76 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 76 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 77 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 77 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=102) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 77 ->
+1.000000 : (state'=77) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 77 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 77 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 77 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=17) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 77 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 77 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 77 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 77 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 77 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 77 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 78 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 78 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 78 ->
+1.000000 : (state'=43) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 78 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 78 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 78 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 78 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 78 ->
+1.000000 : (state'=135) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 78 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 78 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 78 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 78 ->
+1.000000 : (state'=42) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 79 ->
+1.000000 : (state'=79) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 79 ->
+0.900000 : (state'=74) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 79 ->
+1.000000 : (state'=15) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 79 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 79 ->
+1.000000 : (state'=129) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 79 ->
+0.900000 : (state'=49) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 79 ->
+1.000000 : (state'=79) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 79 ->
+1.000000 : (state'=25) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 79 ->
+1.000000 : (state'=79) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 79 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 79 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 79 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 80 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 80 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 80 ->
+1.000000 : (state'=141) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 80 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 80 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 80 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 80 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 80 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 80 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 80 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 80 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 80 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 81 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 81 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 81 ->
+1.000000 : (state'=81) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 81 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 81 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 81 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 81 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 81 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 81 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 81 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 81 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 81 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 82 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 82 ->
+1.000000 : (state'=100) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 82 ->
+1.000000 : (state'=3) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 82 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 82 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 82 ->
+1.000000 : (state'=100) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 82 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 82 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 82 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 82 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 82 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 82 ->
+1.000000 : (state'=100) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 83 ->
+1.000000 : (state'=154) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 83 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 83 ->
+1.000000 : (state'=83) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 83 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 83 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 83 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 83 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 83 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 83 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 83 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 83 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 83 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 84 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 84 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 84 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 84 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 84 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 84 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 84 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 84 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 84 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 84 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 84 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 84 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 85 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 85 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=85) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 85 ->
+1.000000 : (state'=16) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 85 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 85 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 85 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=127) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 85 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 85 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 85 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 85 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 85 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 85 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 86 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 86 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 86 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 86 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 86 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 86 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 86 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 86 ->
+1.000000 : (state'=21) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 86 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 86 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 86 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 86 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 87 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 87 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 87 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 87 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 87 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 87 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 87 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 87 ->
+1.000000 : (state'=12) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 87 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 87 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 87 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 87 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 88 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 88 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 88 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 88 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 88 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 88 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 88 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 88 ->
+1.000000 : (state'=22) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 88 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 88 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 88 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 88 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 89 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 89 ->
+1.000000 : (state'=58) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 89 ->
+1.000000 : (state'=71) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 89 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 89 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 89 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=151) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 89 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 89 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 89 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 89 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 89 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 89 ->
+1.000000 : (state'=108) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 90 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 90 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 90 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 90 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 90 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 90 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 90 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 90 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 90 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 90 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 90 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 90 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 91 ->
+1.000000 : (state'=39) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 91 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=31) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 91 ->
+1.000000 : (state'=91) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 91 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 91 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 91 ->
+0.900000 : (state'=40) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 91 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 91 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 91 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 91 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 91 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 91 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 92 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 92 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 92 ->
+1.000000 : (state'=130) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 92 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 92 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 92 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 92 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 92 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 92 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 92 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 92 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 92 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 93 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 93 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=74) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 93 ->
+1.000000 : (state'=93) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 93 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 93 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 93 ->
+0.900000 : (state'=59) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 93 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 93 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 93 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 93 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 93 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 93 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 94 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 94 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 94 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 94 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 94 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 94 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 94 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 94 ->
+1.000000 : (state'=78) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 94 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 94 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 94 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 94 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 95 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 95 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=74) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 95 ->
+1.000000 : (state'=93) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 95 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 95 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 95 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=59) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 95 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 95 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 95 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 95 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 95 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 95 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 96 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 96 ->
+1.000000 : (state'=47) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 96 ->
+1.000000 : (state'=96) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 96 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 96 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 96 ->
+0.900000 : (state'=112) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 96 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 96 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 96 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 96 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 96 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 96 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 97 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 97 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 97 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 97 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 97 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 97 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 97 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 97 ->
+1.000000 : (state'=34) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 97 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 97 ->
+1.000000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 97 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 97 ->
+1.000000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 98 ->
+1.000000 : (state'=75) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 98 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=31) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 98 ->
+1.000000 : (state'=2) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 98 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 98 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 98 ->
+0.900000 : (state'=125) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 98 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 98 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 98 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 98 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 98 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 98 ->
+1.000000 : (state'=98) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 99 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 99 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 99 ->
+1.000000 : (state'=99) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 99 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 99 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 99 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 99 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 99 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 99 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 99 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 99 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 99 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 100 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 100 ->
+1.000000 : (state'=58) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 100 ->
+1.000000 : (state'=58) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 100 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 100 ->
+1.000000 : (state'=100) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 100 ->
+1.000000 : (state'=58) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 100 ->
+1.000000 : (state'=100) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 100 ->
+1.000000 : (state'=21) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 100 ->
+1.000000 : (state'=100) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 100 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 100 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 100 ->
+1.000000 : (state'=58) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 101 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 101 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=101) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 101 ->
+1.000000 : (state'=142) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 101 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 101 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 101 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=53) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 101 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 101 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 101 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 101 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 101 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 101 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 102 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 102 ->
+0.900000 : (state'=102) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 102 ->
+1.000000 : (state'=77) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 102 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 102 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 102 ->
+0.900000 : (state'=17) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 102 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 102 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 102 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 102 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 102 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 102 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 103 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 103 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 103 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 103 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 103 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 103 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 103 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 103 ->
+1.000000 : (state'=22) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 103 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 103 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 103 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 103 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 104 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 104 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 104 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 104 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 104 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 104 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 104 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 104 ->
+1.000000 : (state'=12) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 104 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 104 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 104 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 104 ->
+1.000000 : (state'=57) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 105 ->
+1.000000 : (state'=105) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 105 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 105 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 105 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 105 ->
+1.000000 : (state'=108) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 105 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=46) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 105 ->
+1.000000 : (state'=105) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 105 ->
+1.000000 : (state'=139) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 105 ->
+1.000000 : (state'=105) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 105 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 105 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 105 ->
+1.000000 : (state'=105) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 106 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 106 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 106 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 106 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 106 ->
+1.000000 : (state'=100) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 106 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 106 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 106 ->
+1.000000 : (state'=148) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 106 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 106 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 106 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 106 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 107 ->
+1.000000 : (state'=155) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 107 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=102) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 107 ->
+1.000000 : (state'=107) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 107 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 107 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 107 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=140) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 107 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 107 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 107 ->
+1.000000 : (state'=7) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 107 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 107 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 107 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 108 ->
+1.000000 : (state'=105) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 108 ->
+1.000000 : (state'=58) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 108 ->
+1.000000 : (state'=58) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 108 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 108 ->
+1.000000 : (state'=108) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 108 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=151) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 108 ->
+1.000000 : (state'=108) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 108 ->
+1.000000 : (state'=131) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 108 ->
+1.000000 : (state'=108) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 108 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 108 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 108 ->
+1.000000 : (state'=108) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 109 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 109 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 109 ->
+1.000000 : (state'=38) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 109 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 109 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 109 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 109 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 109 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 109 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 109 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 109 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 109 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 110 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 110 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 110 ->
+1.000000 : (state'=110) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 110 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 110 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 110 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 110 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 110 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 110 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 110 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 110 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 110 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 111 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 111 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 111 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 111 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 111 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 111 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 111 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 111 ->
+1.000000 : (state'=29) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 111 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 111 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 111 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 111 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 112 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 112 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 112 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 112 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 112 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 112 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 112 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 112 ->
+1.000000 : (state'=90) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 112 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 112 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 112 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 112 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 113 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 113 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 113 ->
+1.000000 : (state'=81) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 113 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 113 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 113 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 113 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 113 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 113 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 113 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 113 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 113 ->
+1.000000 : (state'=113) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 114 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 114 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 114 ->
+1.000000 : (state'=114) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 114 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 114 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 114 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 114 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 114 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 114 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 114 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 114 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 114 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 115 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 115 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 115 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 115 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 115 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 115 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 115 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 115 ->
+1.000000 : (state'=29) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 115 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 115 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 115 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 115 ->
+1.000000 : (state'=63) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 116 ->
+0.900000 : (state'=97) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 116 ->
+0.900000 : (state'=70) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 116 ->
+0.900000 : (state'=70) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 116 ->
+0.100000 : (state'=97) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 116 ->
+0.100000 : (state'=97) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 116 ->
+0.900000 : (state'=70) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 116 ->
+0.100000 : (state'=73) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 116 ->
+0.900000 : (state'=34) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=34) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 116 ->
+0.100000 : (state'=97) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 116 ->
+0.900000 : (state'=97) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=97) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 116 ->
+0.900000 : (state'=66) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 116 ->
+0.900000 : (state'=70) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=70) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 117 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 117 ->
+0.900000 : (state'=85) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 117 ->
+1.000000 : (state'=117) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 117 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 117 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 117 ->
+0.900000 : (state'=134) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 117 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 117 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 117 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 117 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 117 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 117 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 118 ->
+1.000000 : (state'=36) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 118 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=45) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 118 ->
+1.000000 : (state'=118) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 118 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 118 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 118 ->
+0.900000 : (state'=26) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 118 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 118 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 118 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 118 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 118 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 118 ->
+1.000000 : (state'=62) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 119 ->
+1.000000 : (state'=39) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 119 ->
+0.900000 : (state'=133) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 119 ->
+1.000000 : (state'=5) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 119 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 119 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 119 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=40) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 119 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 119 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 119 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 119 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 119 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 119 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 120 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 120 ->
+0.900000 : (state'=85) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 120 ->
+1.000000 : (state'=117) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 120 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 120 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 120 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=134) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 120 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 120 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 120 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 120 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 120 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 120 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 121 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 121 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 121 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 121 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 121 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 121 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 121 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 121 ->
+1.000000 : (state'=148) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 121 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 121 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 121 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 121 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 122 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 122 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 122 ->
+1.000000 : (state'=67) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 122 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 122 ->
+1.000000 : (state'=89) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 122 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=46) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 122 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 122 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 122 ->
+1.000000 : (state'=122) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 122 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 122 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 122 ->
+1.000000 : (state'=105) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 123 ->
+1.000000 : (state'=154) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 123 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 123 ->
+1.000000 : (state'=83) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 123 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 123 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 123 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 123 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 123 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 123 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 123 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 123 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 123 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 124 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 124 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=102) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 124 ->
+1.000000 : (state'=77) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 124 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 124 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 124 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=17) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 124 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 124 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 124 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 124 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 124 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 124 ->
+1.000000 : (state'=124) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 125 ->
+1.000000 : (state'=75) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 125 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 125 ->
+1.000000 : (state'=37) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 125 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 125 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 125 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 125 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 125 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 125 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 125 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 125 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 125 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 126 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 126 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 126 ->
+1.000000 : (state'=126) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 126 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 126 ->
+1.000000 : (state'=82) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 126 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 126 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 126 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 126 ->
+1.000000 : (state'=27) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 126 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 126 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 126 ->
+1.000000 : (state'=106) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 127 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 127 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 127 ->
+1.000000 : (state'=114) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 127 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 127 ->
+1.000000 : (state'=1) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 127 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 127 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 127 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 127 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 127 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 127 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 127 ->
+1.000000 : (state'=61) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 128 ->
+1.000000 : (state'=65) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 128 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 128 ->
+1.000000 : (state'=128) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 128 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 128 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 128 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 128 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 128 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 128 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 128 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 128 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 128 ->
+1.000000 : (state'=33) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 129 ->
+1.000000 : (state'=137) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 129 ->
+0.900000 : (state'=45) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 129 ->
+1.000000 : (state'=88) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 129 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 129 ->
+1.000000 : (state'=129) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 129 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=92) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 129 ->
+1.000000 : (state'=129) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 129 ->
+1.000000 : (state'=28) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 129 ->
+1.000000 : (state'=129) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 129 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 129 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 129 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 130 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 130 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 130 ->
+1.000000 : (state'=130) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 130 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 130 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 130 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 130 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 130 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 130 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 130 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 130 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 130 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 131 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 131 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 131 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 131 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 131 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 131 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 131 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 131 ->
+1.000000 : (state'=21) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 131 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 131 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 131 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 131 ->
+1.000000 : (state'=86) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 132 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 132 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=45) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 132 ->
+1.000000 : (state'=132) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 132 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 132 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 132 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=92) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 132 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 132 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 132 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 132 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 132 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 132 ->
+1.000000 : (state'=9) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 133 ->
+1.000000 : (state'=39) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 133 ->
+0.900000 : (state'=31) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 133 ->
+1.000000 : (state'=91) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 133 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 133 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 133 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=40) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 133 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 133 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 133 ->
+1.000000 : (state'=119) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 133 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 133 ->
+1.000000 : (state'=69) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 133 ->
+1.000000 : (state'=48) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 134 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 134 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 134 ->
+1.000000 : (state'=141) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 134 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 134 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 134 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 134 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 134 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 134 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 134 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 134 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 134 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 135 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 135 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 135 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 135 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 135 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 135 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 135 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 135 ->
+1.000000 : (state'=78) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 135 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 135 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 135 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 135 ->
+1.000000 : (state'=20) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 136 ->
+1.000000 : (state'=51) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 136 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 136 ->
+1.000000 : (state'=24) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 136 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 136 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 136 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 136 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 136 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 136 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 136 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 136 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 136 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 137 ->
+1.000000 : (state'=137) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 137 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=85) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 137 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 137 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 137 ->
+1.000000 : (state'=55) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 137 ->
+0.900000 : (state'=134) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 137 ->
+1.000000 : (state'=137) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 137 ->
+1.000000 : (state'=139) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 137 ->
+1.000000 : (state'=137) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 137 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 137 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 137 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 138 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 138 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 138 ->
+1.000000 : (state'=138) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 138 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 138 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 138 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 138 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 138 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 138 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 138 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 138 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 138 ->
+1.000000 : (state'=6) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 139 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 139 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 139 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 139 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 139 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 139 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 139 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 139 ->
+1.000000 : (state'=148) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 139 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 139 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 139 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 139 ->
+1.000000 : (state'=121) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 140 ->
+1.000000 : (state'=154) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 140 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 140 ->
+1.000000 : (state'=83) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 140 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 140 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 140 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 140 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 140 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 140 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 140 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 140 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 140 ->
+1.000000 : (state'=123) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 141 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 141 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 141 ->
+1.000000 : (state'=141) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 141 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 141 ->
+1.000000 : (state'=136) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 141 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 141 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 141 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 141 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 141 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 141 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 141 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 142 ->
+1.000000 : (state'=95) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 142 ->
+0.900000 : (state'=101) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 142 ->
+1.000000 : (state'=142) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 142 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 142 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 142 ->
+0.900000 : (state'=53) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 142 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 142 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 142 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 142 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 142 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 142 ->
+1.000000 : (state'=10) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 143 ->
+1.000000 : (state'=109) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 143 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 143 ->
+1.000000 : (state'=30) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 143 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 143 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 143 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 143 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 143 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 143 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 143 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 143 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 143 ->
+1.000000 : (state'=143) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 144 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 144 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 144 ->
+1.000000 : (state'=104) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 144 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 144 ->
+1.000000 : (state'=150) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 144 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 144 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 144 ->
+1.000000 : (state'=54) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 144 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 144 ->
+1.000000 : (state'=87) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 144 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 144 ->
+1.000000 : (state'=144) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 145 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 145 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 145 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 145 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 145 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 145 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 145 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 145 ->
+1.000000 : (state'=22) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 145 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 145 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 145 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 145 ->
+1.000000 : (state'=145) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 146 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 146 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 146 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 146 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 146 ->
+1.000000 : (state'=103) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 146 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 146 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 146 ->
+1.000000 : (state'=152) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 146 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 146 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 146 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 146 ->
+1.000000 : (state'=146) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 147 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 147 ->
+1.000000 : (state'=47) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 147 ->
+1.000000 : (state'=47) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 147 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 147 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 147 ->
+1.000000 : (state'=47) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 147 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 147 ->
+1.000000 : (state'=4) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 147 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 147 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 147 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 147 ->
+1.000000 : (state'=47) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 148 ->
+1.000000 : (state'=137) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 148 ->
+0.900000 : (state'=85) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 148 ->
+1.000000 : (state'=32) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 148 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 148 ->
+1.000000 : (state'=55) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 148 ->
+0.900000 : (state'=134) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 148 ->
+1.000000 : (state'=137) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 148 ->
+1.000000 : (state'=139) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 148 ->
+1.000000 : (state'=137) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 148 ->
+1.000000 : (state'=73) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 148 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 148 ->
+1.000000 : (state'=120) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 149 ->
+1.000000 : (state'=80) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 149 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 149 ->
+1.000000 : (state'=130) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 149 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 149 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 149 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 149 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 149 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 149 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 149 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 149 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 149 ->
+1.000000 : (state'=149) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 150 ->
+1.000000 : (state'=79) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 150 ->
+0.900000 : (state'=101) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 150 ->
+1.000000 : (state'=115) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 150 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 150 ->
+1.000000 : (state'=150) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 150 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=52) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 150 ->
+1.000000 : (state'=150) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 150 ->
+1.000000 : (state'=111) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 150 ->
+1.000000 : (state'=150) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 150 ->
+1.000000 : (state'=14) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 150 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 150 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 151 ->
+1.000000 : (state'=41) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 151 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 151 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 151 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 151 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 151 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 151 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 151 ->
+1.000000 : (state'=68) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 151 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 151 ->
+1.000000 : (state'=0) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 151 ->
+1.000000 : (state'=11) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 151 ->
+1.000000 : (state'=84) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 152 ->
+1.000000 : (state'=79) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 152 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=74) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 152 ->
+1.000000 : (state'=15) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 152 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 152 ->
+1.000000 : (state'=129) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 152 ->
+0.900000 : (state'=49) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 152 ->
+1.000000 : (state'=79) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 152 ->
+1.000000 : (state'=25) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 152 ->
+1.000000 : (state'=79) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 152 ->
+1.000000 : (state'=72) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 152 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 152 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 153 ->
+1.000000 : (state'=76) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 153 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=101) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 153 ->
+1.000000 : (state'=153) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 153 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 153 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 153 ->
+0.900000 : (state'=52) & (steps'=min(BOUND,steps + 1)) + 0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 153 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 153 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 153 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 153 ->
+1.000000 : (state'=94) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 153 ->
+1.000000 : (state'=56) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 153 ->
+1.000000 : (state'=60) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 154 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 154 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 154 ->
+1.000000 : (state'=99) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 154 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 154 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 154 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 154 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 154 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 154 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 154 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 154 ->
+1.000000 : (state'=18) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 154 ->
+1.000000 : (state'=147) & (steps'=min(BOUND,steps + 1));
+[CLOSECONNECTION] state = 155 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_PSH_paren_V_c_V_c_1_paren_] state = 155 ->
+1.000000 : (state'=47) & (steps'=min(BOUND,steps + 1));
+[SYN_plus_ACK_paren_V_c_V_c_0_paren_] state = 155 ->
+1.000000 : (state'=96) & (steps'=min(BOUND,steps + 1));
+[RST_paren_V_c_V_c_0_paren_] state = 155 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[ACCEPT] state = 155 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[FIN_plus_ACK_paren_V_c_V_c_0_paren_] state = 155 ->
+0.100000 : (state'=116) & (steps'=min(BOUND,steps + 1)) + 0.900000 : (state'=112) & (steps'=min(BOUND,steps + 1));
+[LISTEN] state = 155 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[SYN_paren_V_c_V_c_0_paren_] state = 155 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[RCV] state = 155 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_plus_RST_paren_V_c_V_c_0_paren_] state = 155 ->
+1.000000 : (state'=66) & (steps'=min(BOUND,steps + 1));
+[CLOSE] state = 155 ->
+1.000000 : (state'=35) & (steps'=min(BOUND,steps + 1));
+[ACK_paren_V_c_V_c_0_paren_] state = 155 ->
+1.000000 : (state'=23) & (steps'=min(BOUND,steps + 1));
+endmodule
+label  "ACK_plus_SYN_paren_FRESH_c_NEXT_c_0_paren_" = state = 12|state = 21|state = 22|state = 29|state = 78|state = 148|state = 152;
+label  "ACK_plus_RST_paren_ZERO_c_NEXT_c_0_paren_" = state = 4|state = 25|state = 28|state = 34|state = 54|state = 111|state = 131|state = 135|state = 139;
+label  "ACK_paren_NEXT_c_CURRENT_c_0_paren_" = state = 2|state = 3|state = 5|state = 8|state = 13|state = 16|state = 24|state = 30|state = 37|state = 38|state = 64|state = 67|state = 68|state = 71|state = 77|state = 81|state = 83|state = 90|state = 91|state = 93|state = 96|state = 99|state = 107|state = 110|state = 114|state = 117|state = 118|state = 126|state = 128|state = 130|state = 132|state = 138|state = 141|state = 142|state = 153;
+label  "ACK_plus_FIN_paren_NEXT_c_CURRENT_c_0_paren_" = state = 39|state = 51|state = 154|state = 155;
+label  "ACK_paren_NEXT_c_NEXT_c_0_paren_" = state = 17|state = 26|state = 31|state = 40|state = 45|state = 46|state = 49|state = 50|state = 52|state = 53|state = 59|state = 74|state = 85|state = 92|state = 101|state = 102|state = 112|state = 125|state = 127|state = 133|state = 134|state = 140|state = 151;
+label  "start" = state = 19;
+label  "ACK_plus_RST_paren_NEXT_c_CURRENT_c_0_paren_" = state = 56|state = 75;
+label  "RST_paren_NEXT_c_ZERO_c_0_paren_" = state = 15|state = 32|state = 43|state = 47|state = 58|state = 88|state = 104|state = 115;
+label  "TIMEOUT" = state = 0|state = 1|state = 6|state = 7|state = 9|state = 10|state = 11|state = 14|state = 18|state = 23|state = 27|state = 33|state = 35|state = 36|state = 41|state = 42|state = 48|state = 55|state = 60|state = 61|state = 62|state = 65|state = 66|state = 69|state = 72|state = 73|state = 76|state = 79|state = 80|state = 82|state = 84|state = 87|state = 89|state = 94|state = 95|state = 97|state = 98|state = 100|state = 103|state = 105|state = 106|state = 108|state = 109|state = 113|state = 119|state = 120|state = 122|state = 123|state = 124|state = 129|state = 136|state = 137|state = 143|state = 144|state = 147|state = 149|state = 150;
+label  "RST_paren_ZERO_c_ZERO_c_0_paren_" = state = 20|state = 44|state = 57|state = 63|state = 70|state = 86|state = 121|state = 145|state = 146;
+label  "crash" = state = 116;
+

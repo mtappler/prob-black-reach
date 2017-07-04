@@ -1,0 +1,28 @@
+Pmax=? [ F ("Pr10"&steps<8) ]
+
+Pmax=? [ !(F ("end"&steps<7)) ]
+
+Pmax=? [ !(F ("end"&steps<9)) ]
+
+Pmax=? [ !(F ("end"&steps<12)) ]
+
+Pmax=? [ !(F<12 ("end")) ]
+
+Pmax=? [ F ("Pr2"&steps<10) ]
+
+Pmax=? [ F ("Pr10"&steps<10) ]
+
+Pmax=? [ !(F ("end"&steps<15)) ]
+
+Pmin=?[F("end")]
+
+Pmax=? [ !(F ("end"&steps<5)) ]
+
+Pmax=? [ !(F<5 ("end")) ]
+
+Pmax=? [ F ("Pr10"&steps<9) ]
+
+Pmax=? [ F ("r002"&steps<3) ]
+
+Pmax=? [ F ("Pr2"&steps<10) ]
+

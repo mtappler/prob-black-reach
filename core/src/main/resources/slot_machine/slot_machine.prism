@@ -1,0 +1,101 @@
+mdp
+
+formula k = (sp + 1); // k-th round ...
+formula probBAR = 0.7*(r-max(1,k)+1)/r; 
+
+const int r = 3;
+const int BLANK = 0;
+const int BAR = 1;
+const int APPLE = 2;
+
+module SlotMachine
+
+  sp : [0..r] init 0;
+  end : bool init false;
+  terminal : bool init false;
+  reel1 : [0..2] init BLANK;  
+  reel2 : [0..2] init BLANK;  
+  reel3 : [0..2] init BLANK;  
+
+  [spin1] end!=true & sp < r -> probBAR:(reel1'=BAR)& (sp'=sp+1) + 1-probBAR:(reel1'=APPLE)& (sp'=sp+1);
+  [spin1] end!=true & sp=r -> 1:(end'=true);
+
+  [spin2] end!=true & sp < r -> probBAR:(reel2'=BAR)& (sp'=sp+1) + 1-probBAR:(reel2'=APPLE)& (sp'=sp+1);
+  [spin2] end!=true & sp=r -> 1:(end'=true);
+
+  [spin3] end!=true & sp < r -> probBAR:(reel3'=BAR)& (sp'=sp+1) + 1-probBAR:(reel3'=APPLE)& (sp'=sp+1);
+  [spin3] end!=true & sp=r -> 1:(end'=true);
+
+  [stop] end!=true & sp <= 2 -> 0.5:(end'=true) + 0.5:(sp'=0);
+  [stop] end!=true & sp > 2 -> 0.5:(end'=true) + 0.5:(sp'=sp-2);
+
+  [spin1] end=true & terminal=false -> 1:(terminal'=true);
+  [spin2] end=true & terminal=false -> 1:(terminal'=true);
+  [spin3] end=true & terminal=false -> 1:(terminal'=true);
+  [stop]  end=true & terminal=false -> 1:(terminal'=true);
+
+  [spin1] terminal=true -> 1:(terminal'=true);
+  [spin2] terminal=true -> 1:(terminal'=true);
+  [spin3] terminal=true -> 1:(terminal'=true);
+  [stop]  terminal=true -> 1:(terminal'=true);
+
+
+endmodule
+
+label "Pr2"  = 
+((reel1=BLANK & reel2=BAR   & reel3=BAR  ) |
+ (reel1=APPLE & reel2=BAR   & reel3=BAR  ) |
+ (reel1=BAR   & reel2=BLANK & reel3=BAR  ) |
+ (reel1=BAR   & reel2=APPLE & reel3=BAR  ) |
+ (reel1=BAR   & reel2=BAR   & reel3=BLANK) |
+ (reel1=BAR   & reel2=BAR   & reel3=APPLE)) & end=true & !terminal;
+
+label "Pr10" = reel1=BAR   & reel2=BAR   & reel3=BAR   & end=true & !terminal;
+
+label "Pr0" = !((reel1=BLANK & reel2=BAR   & reel3=BAR  ) |
+ (reel1=APPLE & reel2=BAR   & reel3=BAR  ) |
+ (reel1=BAR   & reel2=BLANK & reel3=BAR  ) |
+ (reel1=BAR   & reel2=APPLE & reel3=BAR  ) |
+ (reel1=BAR   & reel2=BAR   & reel3=BLANK) |
+ (reel1=BAR   & reel2=BAR   & reel3=APPLE)) &
+!(reel1=BAR   & reel2=BAR   & reel3=BAR) & end=true & !terminal;
+
+label "end" = terminal=true;
+
+label "r000" = reel1=BLANK & reel2=BLANK & reel3=BLANK & sp <= r & !end;
+label "r001" = reel1=BLANK & reel2=BLANK & reel3=BAR   & sp <= r & !end;
+label "r002" = reel1=BLANK & reel2=BLANK & reel3=APPLE & sp <= r & !end;
+
+label "r010" = reel1=BLANK & reel2=BAR   & reel3=BLANK & sp <= r & !end;
+label "r011" = reel1=BLANK & reel2=BAR   & reel3=BAR   & sp <= r & !end;
+label "r012" = reel1=BLANK & reel2=BAR   & reel3=APPLE & sp <= r & !end;
+
+label "r020" = reel1=BLANK & reel2=APPLE & reel3=BLANK & sp <= r & !end;
+label "r021" = reel1=BLANK & reel2=APPLE & reel3=BAR   & sp <= r & !end;
+label "r022" = reel1=BLANK & reel2=APPLE & reel3=APPLE & sp <= r & !end;
+
+label "r100" = reel1=BAR   & reel2=BLANK & reel3=BLANK & sp <= r & !end;
+label "r101" = reel1=BAR   & reel2=BLANK & reel3=BAR   & sp <= r & !end;
+label "r102" = reel1=BAR   & reel2=BLANK & reel3=APPLE & sp <= r & !end;
+
+label "r110" = reel1=BAR   & reel2=BAR   & reel3=BLANK & sp <= r & !end;
+label "r111" = reel1=BAR   & reel2=BAR   & reel3=BAR   & sp <= r & !end;
+label "r112" = reel1=BAR   & reel2=BAR   & reel3=APPLE & sp <= r & !end;
+
+label "r120" = reel1=BAR   & reel2=APPLE & reel3=BLANK & sp <= r & !end;
+label "r121" = reel1=BAR   & reel2=APPLE & reel3=BAR   & sp <= r & !end;
+label "r122" = reel1=BAR   & reel2=APPLE & reel3=APPLE & sp <= r & !end;
+
+label "r200" = reel1=APPLE & reel2=BLANK & reel3=BLANK & sp <= r & !end;
+label "r201" = reel1=APPLE & reel2=BLANK & reel3=BAR   & sp <= r & !end;
+label "r202" = reel1=APPLE & reel2=BLANK & reel3=APPLE & sp <= r & !end;
+
+label "r210" = reel1=APPLE & reel2=BAR   & reel3=BLANK & sp <= r & !end;
+label "r211" = reel1=APPLE & reel2=BAR   & reel3=BAR   & sp <= r & !end;
+label "r212" = reel1=APPLE & reel2=BAR   & reel3=APPLE & sp <= r & !end;
+
+label "r220" = reel1=APPLE & reel2=APPLE & reel3=BLANK & sp <= r & !end;
+label "r221" = reel1=APPLE & reel2=APPLE & reel3=BAR   & sp <= r & !end;
+label "r222" = reel1=APPLE & reel2=APPLE & reel3=APPLE & sp <= r & !end;
+
+

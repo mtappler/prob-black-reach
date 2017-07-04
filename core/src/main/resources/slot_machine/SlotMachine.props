@@ -1,0 +1,18 @@
+Pmax=? [ F "Pr10" ]
+
+Pmax=? [ X (X ("r200")) ]
+
+Pmax=? [ F "Pr2" ]
+
+Pmax=?[!(F<7("end"))]
+
+Pmax=? [ X (X ("r001")) ]
+
+Pmax=? [ X (X ("r100")) ]
+
+Pmax=? [ X(X(X("r100"))) ]
+
+Pmax=? [ X ("r100") ]
+
+Pmax=? [ X (X ("r200")) ]
+
