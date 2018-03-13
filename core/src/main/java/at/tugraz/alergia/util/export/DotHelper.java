@@ -71,6 +71,7 @@ public class DotHelper<S extends Step> {
 	
 	public void writeToFile(MarkovChain<S> mc, String fileName) throws IOException{
 		File f = new File(fileName);
+		f.getParentFile().mkdirs();
 		try(FileWriter fw = new FileWriter(f)){
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(toDot(mc));

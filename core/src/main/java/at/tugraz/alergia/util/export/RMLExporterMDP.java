@@ -34,7 +34,7 @@ public class RMLExporterMDP extends RMLExporter<InputOutputStep> {
 	}
 
 	@Override
-	protected String modelType() {
+	public String modelType() {
 		return "mdp";
 	}
 	

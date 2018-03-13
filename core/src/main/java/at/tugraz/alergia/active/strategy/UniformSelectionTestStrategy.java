@@ -53,4 +53,9 @@ public class UniformSelectionTestStrategy extends TestStrategy{
 		return sampleTraceUniformly();
 	}
 
+	@Override
+	public boolean converging(double confidence, double threshhold) {
+		return false;
+	}
+
 }

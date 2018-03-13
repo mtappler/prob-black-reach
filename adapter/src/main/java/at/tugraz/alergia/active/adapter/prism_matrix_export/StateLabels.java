@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 public class StateLabels {
 	private long stateId = -1;
+	// must be sorted 
 	private List<Long> labelIds = null;
 
 	public StateLabels(long stateId, List<Long> labelIds) {
@@ -43,7 +44,7 @@ public class StateLabels {
 		
 		int stateId = Integer.parseInt(matcher.group(STATE_ID));
 		List<Long> labelIds = Arrays.asList(matcher.group(LABEL_IDS).split(" ")).stream().map(Long::parseLong)
-				.collect(Collectors.toList());
+				.sorted().collect(Collectors.toList());
 		return new StateLabels(stateId, labelIds);
 	}
 

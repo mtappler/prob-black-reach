@@ -30,29 +30,28 @@ import at.tugraz.alergia.active.strategy.adversary.AdversaryBasedTestStrategy;
 import at.tugraz.alergia.data.InputOutputStep;
 import at.tugraz.alergia.data.InputSymbol;
 
-public class EvalSlotR5Pr10R111 {
-	public static long[] seeds = { 1000l, 2000l,3000l, 4000l, 5000l, 6000l, 7000l, 8000l, 9000l, 10000l,//,
+public class EvalEmqttTwoClientJournal {
+	public static long[] seeds = { 1000l, 2000l, 3000l, 4000l, 5000l, 6000l, 7000l, 8000l, 9000l, 10000l,
 			11000l, 12000l, 13000l, 14000l, 15000l, 16000l, 17000l, 18000l, 19000l, 110000l};
 	public static final int STEP_BOUND = 20;
-	public static final double STOP_PROBABILITY = 0.05;
-	public static final int ROUNDS = 100;
-	public static final int BATCH = 500;
-	
+	public static final double STOP_PROBABILITY = 0.025;
+	public static final int BASE_BATCH_SIZE = 100;
+	public static final int ROUNDS = 60;
 
-	public static final Predicate<List<InputOutputStep>> alternativeStoppingCriterion = (List<InputOutputStep> trace) -> 
-		trace.get(trace.size()-1).getOutput().stringRepresentation().equals("end");
+	public static final Predicate<List<InputOutputStep>> alternativeStoppingCriterion = (
+			List<InputOutputStep> trace) -> false;
 
 	public static ActiveTestingStrategyInference incremental(Adapter adapter, InputSymbol[] inputs,
 			String prismLocation) {
 		double probRandomSample = 0.75;
 		double probRandomSampleChangeFactor = 0.95;
 		int nrRounds = ROUNDS;
-		int batchSize = BATCH;
+		int batchSize = BASE_BATCH_SIZE;
 		long initialSeed = 0;
 
 		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
 				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
-		
+
 		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
 		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
 	}
@@ -60,43 +59,26 @@ public class EvalSlotR5Pr10R111 {
 			String prismLocation) {
 		double probRandomSample = 0.75;
 		double probRandomSampleChangeFactor = 0.95;
-		int nrRounds = ROUNDS;
-		int batchSize = BATCH;
+		int nrRounds = 200;
+		int batchSize = BASE_BATCH_SIZE;
 		long initialSeed = 0;
 
 		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
 				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
+
 		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
 		ActiveTestingStrategyInference inferrer = new ActiveTestingStrategyInference(nrRounds, testStrategy);
 		inferrer.setConvergenceCheck(true);
 		inferrer.setConfidenceDelta(0.01);
-		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
 		return inferrer;
 	}
 
-
-	public static ActiveTestingStrategyInference hybrid(Adapter adapter, InputSymbol[] inputs,
-			String prismLocation) {
-		double probRandomSample = 0.75;
-		double probRandomSampleChangeFactor = 0.95;
-		int nrRounds = ROUNDS;
-		int batchSize = BATCH/2;
-		long initialSeed = 0;
-
-		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
-				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
-		
-		testStrategy.setHybrid(true);
-		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
-		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
-	}
-	
 	public static ActiveTestingStrategyInference monolithic(Adapter adapter, InputSymbol[] inputs,
 			String prismLocation) {
 		double probRandomSample = 1;
 		double probRandomSampleChangeFactor = 1;
 		int nrRounds = 1;
-		int batchSize = ROUNDS * BATCH;
+		int batchSize = BASE_BATCH_SIZE * ROUNDS;
 		long initialSeed = 0;
 
 		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
@@ -117,43 +99,44 @@ public class EvalSlotR5Pr10R111 {
 	public static void main(String[] args) throws Exception {
 
 		String prismLocation = Config.prismLocation();
-		InputSymbol[] inputs = new InputSymbol[] { new InputSymbol("stop"), new InputSymbol("spin1"),
-				new InputSymbol("spin2"), new InputSymbol("spin3") };
+		InputSymbol[] inputs = new InputSymbol[] { new InputSymbol("ConnectC2"), new InputSymbol("ConnectC1WithWill"),
+				new InputSymbol("PublishQoS0C2"), new InputSymbol("PublishQoS1C1"), new InputSymbol("SubscribeC1"),
+				new InputSymbol("UnSubScribeC1"), new InputSymbol("SubscribeC2"), new InputSymbol("UnSubScribeC2"),
+				new InputSymbol("DisconnectTCPC1") };
 
-		Adapter adapter = new MatrixExportAdapter("src/main/resources/slot_machine_step_count_r5/slot_machine");
-		
-		String prismFile = "src/main/resources/slot_machine_step_count_r5/slot_machine.prism";	
-		String propertiesFile = "src/main/resources/slot_machine_step_count_r5/Pr10_R111.props";
-		
-		int lowerBound = 0;
-		int upperBound = 10;
-		int[] properties = new int[]{7,9};// new int[upperBound - lowerBound];
-//		for (int i = lowerBound; i < upperBound; i++)
-//			properties[i - lowerBound] = i + 1;
-		String path = "log/logr5_pr10_r111";
-		Experiment baseline = new Experiment(path, baseline(adapter, inputs, prismLocation), adapter, seeds, propertiesFile,
-				"baseline", properties);
+		Adapter adapter = new MatrixExportAdapter("src/main/resources/mqtt/emqtt_two_client");
+
+		String prismFile = "src/main/resources/mqtt/emqtt_two_client.prism";
+		String propertiesFile = "src/main/resources/mqtt/emqtt_two_client.props";
+
+		int lowerBound = 3;
+		int upperBound = 8;
+		int[] properties = new int[upperBound - lowerBound];
+		for (int i = lowerBound; i < upperBound; i++)
+			properties[i - lowerBound] = i + 1;
+		String path = "log/emqtt/journal";
+		Experiment baseline = new Experiment(path, baseline(adapter, inputs, prismLocation), adapter, seeds,
+				propertiesFile, "baseline", properties);
 		baseline.run();
-		Experiment monolithicExperiment = new Experiment(path, monolithic(adapter, inputs, prismLocation), adapter, seeds,
-				propertiesFile, "monolithic", properties);
+		Experiment monolithicExperiment = new Experiment(path, monolithic(adapter, inputs, prismLocation), adapter,
+				seeds, propertiesFile, "monolithic", properties);
 		monolithicExperiment.run();
-		Experiment incrementalExperiment = new Experiment(path, incremental(adapter, inputs, prismLocation), adapter, seeds,
-				propertiesFile, "incremental", properties);
-		incrementalExperiment.run();
-		Experiment incrementalConvExperiment = new Experiment(path, incrementalConv(adapter, inputs, prismLocation), adapter, seeds,
-				propertiesFile, "incremental-conv", properties);
-		incrementalConvExperiment.run();
-		Experiment hybridExperiment = new Experiment(path, hybrid(adapter, inputs, prismLocation), adapter, seeds,
-				propertiesFile, "hybrid", properties);
-		hybridExperiment.run();
 
-		EvalUtil.printSummaries(prismLocation,prismFile, propertiesFile, monolithicExperiment,
-				incrementalExperiment,incrementalConvExperiment,hybridExperiment,baseline);
-		BoxplotExporter exporter = new BoxplotExporter(false, prismLocation, prismFile, propertiesFile);
-		List<Experiment> experiments = Arrays.asList(incrementalExperiment,monolithicExperiment,incrementalConvExperiment);
-		List<String> colours = Arrays.asList("black","blue","red");
-		List<Integer> boxProperties = Arrays.asList(7,9);
-		List<Integer> stepBounds = Arrays.asList(8,14);
+		Experiment incrementalSlowExperiment = new Experiment(path, incremental(adapter, inputs, prismLocation),
+				adapter, seeds, propertiesFile, "incremental-slow", properties);
+		incrementalSlowExperiment.run();
+	
+		Experiment incrementalConvExperiment = new Experiment(path, incrementalConv(adapter, inputs, prismLocation),
+				adapter, seeds, propertiesFile, "incremental-conv", properties);
+		incrementalConvExperiment.run();
+
+		EvalUtil.printSummaries(prismLocation, prismFile, propertiesFile, monolithicExperiment,
+				incrementalSlowExperiment,incrementalConvExperiment, baseline);
+		BoxplotExporter exporter = new BoxplotExporter(true, prismLocation, prismFile, propertiesFile);
+		List<Experiment> experiments = Arrays.asList(incrementalConvExperiment,incrementalSlowExperiment ,monolithicExperiment);
+		List<String> colours = Arrays.asList("red", "black","blue");
+		List<Integer> boxProperties = Arrays.asList(5,6,7,4,8);
+		List<Integer> stepBounds = Arrays.asList(5,8,11,14,17);
 		System.out.println(exporter.export(stepBounds,boxProperties, experiments, colours));
 	}
 

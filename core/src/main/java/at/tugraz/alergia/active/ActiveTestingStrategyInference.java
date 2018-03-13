@@ -19,7 +19,6 @@ package at.tugraz.alergia.active;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import at.tugraz.alergia.Alergia;
 import at.tugraz.alergia.active.strategy.TestStrategy;
@@ -31,6 +30,7 @@ import at.tugraz.alergia.data.FiniteString;
 import at.tugraz.alergia.data.InputOutputStep;
 import at.tugraz.alergia.pta.IOFPTANodeFactory;
 import at.tugraz.alergia.pta.PTANodeFactory;
+import at.tugraz.alergia.util.export.DotMDPHelper;
 
 public class ActiveTestingStrategyInference {
 	private static final double EPSILON_FACTOR = 100.0;
@@ -46,15 +46,20 @@ public class ActiveTestingStrategyInference {
 	private long lastRunDuration = 0;
 	private int convergenceRounds = 3; // 10 for emqtt, 5 for TCP
 	private double convergenceDelta = 0.01; // 0.01 for emqtt
-	private double z_alpha =  2.5758;
-	
+	private double z_alpha = 2.5758;
+	private double convergenceConfidence = 0.99;
+	private boolean evalEachRound = false;
+	private List<Double> evaluations = new ArrayList<>();
+
 	private boolean convergenceCheck = false;
+	private Integer executedRounds = -1;
 
 	public ActiveTestingStrategyInference(int maxNrRounds, TestStrategy strategy) {
 		this.maxNrRounds = maxNrRounds;
 		this.alergia = new Alergia<>(DEFAULT_EPS_LEARNING);
 		this.strategy = strategy;
-		// this is probably only smart for maximising the propability of satisfying a property
+		// this is probably only smart for maximising the propability of
+		// satisfying a property
 		// for reachability, we don't want to have chaos states for all outputs,
 		// as an adversary
 		// may try to reach those steps because the probability a reaching a
@@ -67,10 +72,13 @@ public class ActiveTestingStrategyInference {
 		// FOR NOW: only true as we have no properties other than reachability
 		this.mcTransformer.setDontKnowChaos(true);
 		Property property = strategy.getProperty();
-		alergia.setAdditionalCompatibilityCheck(
-				Optional.of((string1, string2) -> property.evaluate(string1) == property.evaluate(string2)));
-		// this does not do anything for !F<s("end") since this is almost always the last symbol in a string
-		alergia.setMaxDepthAddtional(0); 
+		// TODO eval the following again
+		// alergia.setAdditionalCompatibilityCheck(
+		// Optional.of((string1, string2) -> property.evaluate(string1) ==
+		// property.evaluate(string2)));
+		// this does not do anything for !F<s("end") since this is almost always
+		// the last symbol in a string
+		alergia.setMaxDepthAddtional(0);
 	}
 
 	public int getConvergenceRounds() {
@@ -106,62 +114,92 @@ public class ActiveTestingStrategyInference {
 	}
 
 	public double run() throws Exception {
-		
+
 		List<FiniteString<InputOutputStep>> sample = new ArrayList<>();
 		int round = 0;
 		long startTime = System.currentTimeMillis();
-		
+
+		boolean verbose = "true".equals(System.getProperty("verbose"));
+		int currentlyConvergingRounds = 0;
+
 		for (round = 0; round < maxNrRounds; round++) {
 			List<FiniteString<InputOutputStep>> currSample = strategy.sample();
 			sample.addAll(currSample);
 			MarkovChain<InputOutputStep> mdp = learn(sample);
+			if (verbose) {
+				DotMDPHelper dotexporter = new DotMDPHelper();
+				// quick and dirty for presentation
+				dotexporter.writeToFile(mdp,
+						"hypotheses/hyp_" + strategy.getProperty().getSteps() + "_" + round + ".dot");
+			}
 			strategy.update(mdp);
-			double freqTrueInSample = (double) currSample.stream()
-					.filter(t->strategy.getProperty().evaluate(t)).count() / currSample.size();
-				
-			if(convergenceCheck && converging(sample, currSample.size(), round)){
+			double freqTrueInSample = (double) currSample.stream().filter(t -> strategy.getProperty().evaluate(t))
+					.count() / currSample.size();
+
+			if (convergenceCheck && strategy.converging(convergenceConfidence, confidenceDelta)) {// converging(sample,
+																									// currSample.size(),
+																									// round))
+																									// {
+				currentlyConvergingRounds++;
+			} else {
+				currentlyConvergingRounds = 0;
+			}
+
+			if (evalEachRound) {
+				double evaluationResult = evaluate();
+				evaluations.add(evaluationResult);
+			}
+
+			if (currentlyConvergingRounds >= convergenceRounds) {
 				System.out.println("Converging");
 				break;
 			}
 			System.out.println("Frequency in sample: " + freqTrueInSample);
 		}
+		executedRounds = round;
 		lastRunDuration = System.currentTimeMillis() - startTime;
 		System.out.println("Total nr steps: " + strategy.getTotalNrSteps() + " after " + round + " rounds.");
-		double result = strategy.evaluate(errorEpsilon, confidenceDelta);
+		double result = evaluate();
 		return result;
 	}
 
+	private double evaluate() {
+
+		return strategy.evaluate(errorEpsilon, confidenceDelta);
+	}
+
 	private boolean converging(List<FiniteString<InputOutputStep>> sample, int sampleSizeRound, int round) {
-		if(round < convergenceRounds * 2)
+		if (round < convergenceRounds * 2)
 			return false;
 		int n = sampleSizeRound * convergenceRounds;
-		List<FiniteString<InputOutputStep>> oldSamples = sample.subList((round - convergenceRounds * 2) * sampleSizeRound, 
-				(round - convergenceRounds)* sampleSizeRound );
-		
-		List<FiniteString<InputOutputStep>> newSamples = sample.subList((round - convergenceRounds) * sampleSizeRound, round * sampleSizeRound );
-		double px = oldSamples.stream().filter(t -> strategy.getProperty().evaluate(t)).count() / (double)n;
-		double py = newSamples.stream().filter(t -> strategy.getProperty().evaluate(t)).count() / (double)n;
+		List<FiniteString<InputOutputStep>> oldSamples = sample.subList(
+				(round - convergenceRounds * 2) * sampleSizeRound, (round - convergenceRounds) * sampleSizeRound);
 
-		double l_1 = (-Math.sqrt(n) * z_alpha * Math.sqrt(4*n*px + n*z_alpha*z_alpha - 4*px*px) +2*n*px + 
-				n*z_alpha*z_alpha) / (2*(n*n+n*z_alpha*z_alpha));
-		
-		double l_2 = (-Math.sqrt(n) * z_alpha * Math.sqrt(4*n*py + n*z_alpha*z_alpha - 4*py*py) +2*n*py + 
-				n*z_alpha*z_alpha) / (2*(n*n+n*z_alpha*z_alpha));
-		
-		double u_1 = (Math.sqrt(n) * z_alpha * Math.sqrt(4*n*px + n*z_alpha*z_alpha - 4*px*px) +2*n*px + 
-				n*z_alpha*z_alpha) / (2*(n*n+n*z_alpha*z_alpha));
-		double u_2 = (Math.sqrt(n) * z_alpha * Math.sqrt(4*n*py + n*z_alpha*z_alpha - 4*py*py) +2*n*py + 
-				n*z_alpha*z_alpha) / (2*(n*n+n*z_alpha*z_alpha));
+		List<FiniteString<InputOutputStep>> newSamples = sample.subList((round - convergenceRounds) * sampleSizeRound,
+				round * sampleSizeRound);
+		double px = oldSamples.stream().filter(t -> strategy.getProperty().evaluate(t)).count() / (double) n;
+		double py = newSamples.stream().filter(t -> strategy.getProperty().evaluate(t)).count() / (double) n;
 
-		double smallDelta = z_alpha * Math.pow(l_1*(1-l_1)/n + u_2*(1-u_2)/n, 0.5);
-		double epsilon = z_alpha * Math.pow(u_1*(1-u_1)/n + l_2*(1-l_2)/n, 0.5);
+		double l_1 = (-Math.sqrt(n) * z_alpha * Math.sqrt(4 * n * px + n * z_alpha * z_alpha - 4 * px * px) + 2 * n * px
+				+ n * z_alpha * z_alpha) / (2 * (n * n + n * z_alpha * z_alpha));
+
+		double l_2 = (-Math.sqrt(n) * z_alpha * Math.sqrt(4 * n * py + n * z_alpha * z_alpha - 4 * py * py) + 2 * n * py
+				+ n * z_alpha * z_alpha) / (2 * (n * n + n * z_alpha * z_alpha));
+
+		double u_1 = (Math.sqrt(n) * z_alpha * Math.sqrt(4 * n * px + n * z_alpha * z_alpha - 4 * px * px) + 2 * n * px
+				+ n * z_alpha * z_alpha) / (2 * (n * n + n * z_alpha * z_alpha));
+		double u_2 = (Math.sqrt(n) * z_alpha * Math.sqrt(4 * n * py + n * z_alpha * z_alpha - 4 * py * py) + 2 * n * py
+				+ n * z_alpha * z_alpha) / (2 * (n * n + n * z_alpha * z_alpha));
+
+		double smallDelta = z_alpha * Math.pow(l_1 * (1 - l_1) / n + u_2 * (1 - u_2) / n, 0.5);
+		double epsilon = z_alpha * Math.pow(u_1 * (1 - u_1) / n + l_2 * (1 - l_2) / n, 0.5);
 		double L = px - py - smallDelta;
 		double U = px - py + epsilon;
 		System.out.println(px);
 		System.out.println(py);
 		System.out.println(L);
 		System.out.println(U);
-		
+
 		return L >= -convergenceDelta && U <= convergenceDelta && L <= U;
 	}
 
@@ -239,5 +277,19 @@ public class ActiveTestingStrategyInference {
 		this.lastRunDuration = lastRunDuration;
 	}
 
-	
+	public boolean isEvalEachRound() {
+		return evalEachRound;
+	}
+
+	public void setEvalEachRound(boolean evalEachRound) {
+		this.evalEachRound = evalEachRound;
+	}
+
+	public List<Double> getEvaluations() {
+		return evaluations;
+	}
+
+	public Integer getExecutedRounds() {
+		return executedRounds;
+	}
 }

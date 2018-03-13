@@ -19,10 +19,14 @@ package at.tugraz.alergia.active.strategy;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.function.Predicate;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import at.tugraz.alergia.active.Property;
 import at.tugraz.alergia.active.adapter.Adapter;
@@ -46,6 +50,9 @@ public abstract class TestStrategy {
 	protected long totalNrSteps;
 	// an estimation of the probability, for instance calculated by PRISM 
 	protected Optional<Double> additionalProbEstimation = Optional.empty();
+	protected Map<String,OutputSymbol> outputAlphabet = new HashMap<>();
+	private Map<String,InputSymbol> inputAlphabetMap = new HashMap<>();
+	private Map<Pair<String,String>,InputOutputStep> inputOutputSteps = new HashMap<>();
 	
 	public TestStrategy(Adapter adapter, int batchSize, long seed, double stopProb, InputSymbol[] inputAlphabet){
 		this.adapter = adapter;
@@ -66,6 +73,8 @@ public abstract class TestStrategy {
 	}
 
 	public abstract List<FiniteString<InputOutputStep>> sample();
+	
+	public abstract boolean converging(double confidence, double threshold);
 	
 	
 	public void init(String propertiesFile, int selectedProperty) throws IOException {
@@ -117,12 +126,41 @@ public abstract class TestStrategy {
 				break;
 			InputSymbol input = inputAlphabet[rndSource.nextInt(inputAlphabet.length)];
 			String output = adapter.execute(input.stringRepresentation());
-			stringContent.add(new InputOutputStep(input, new OutputSymbol(output)));
+			stringContent.add(inputOutputStep(input.stringRepresentation(), output));
 			if(alternativeStoppingCriterion != null && alternativeStoppingCriterion.test(stringContent))
 				break;
 		}
 		totalNrSteps += nrSteps;
-		return new FiniteString<>(stringContent, new OutputSymbol(initialOutput));
+		return new FiniteString<>(stringContent, outputSymbol(initialOutput));
+	}
+
+	protected InputOutputStep inputOutputStep(String input, String output) {
+		Pair<String, String> inputOutputPair = Pair.of(input, output);
+		InputOutputStep step = inputOutputSteps.get(inputOutputPair);
+		if(step== null){
+			step = new InputOutputStep(inputSymbol(input), outputSymbol(output));
+			inputOutputSteps.put(inputOutputPair,step);
+		}
+			
+		return step;
+	}
+	protected InputSymbol inputSymbol(String input) {
+		InputSymbol symbol = inputAlphabetMap .get(input);
+		if(symbol== null){
+			symbol = new InputSymbol(input);
+			inputAlphabetMap.put(input,symbol);
+		}
+			
+		return symbol;
+	}
+	protected OutputSymbol outputSymbol(String output) {
+		OutputSymbol symbol = outputAlphabet.get(output);
+		if(symbol== null){
+			symbol = new OutputSymbol(output);
+			outputAlphabet.put(output,symbol);
+		}
+			
+		return symbol;
 	}
 	public void setAlternativeStoppingCriterion(Predicate<List<InputOutputStep>> alternativeStoppingCriterion) {
 		this.alternativeStoppingCriterion = alternativeStoppingCriterion;

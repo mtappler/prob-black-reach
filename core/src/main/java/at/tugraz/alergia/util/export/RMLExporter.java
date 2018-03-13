@@ -51,11 +51,11 @@ public abstract class RMLExporter<S extends Step> {
 		appendOutLabels(sb,mc,stateIdsRemapping);
 		return sb.toString();
 	}
-	private void appendStepBountConstant(StringBuilder sb, int stepBound) {
+	public void appendStepBountConstant(StringBuilder sb, int stepBound) {
 		if(stepBound > -1)
 			appendLine(sb, String.format("const int BOUND = %d;", stepBound));
 	}
-	private void appendStepCountVar(StringBuilder sb, int stepBound) {
+	public void appendStepCountVar(StringBuilder sb, int stepBound) {
 		if(stepBound > -1){
 			 appendLine(sb,"steps : [0..BOUND] init 0;");
 			  
@@ -99,9 +99,15 @@ public abstract class RMLExporter<S extends Step> {
 		}
 		return result;
 	}
-	protected abstract String modelType();
-	protected void appendLine(StringBuilder sb, String line){
+	public abstract String modelType();
+	public void appendLine(StringBuilder sb, String line){
 		sb.append(line);
 		sb.append(System.lineSeparator());
+	}
+	public String getModelName() {
+		return modelName;
+	}
+	public void setModelName(String modelName) {
+		this.modelName = modelName;
 	}
 }

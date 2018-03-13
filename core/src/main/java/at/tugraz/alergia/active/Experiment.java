@@ -33,12 +33,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import at.tugraz.alergia.active.adapter.Adapter;
-import at.tugraz.alergia.active.eval.BoxplotExporter.BoxData;
+import at.tugraz.alergia.active.eval.BoxData;
 
 public class Experiment {
 
 	private static final String doubleRegexString = "(1\\.0|1|0\\.0|0|0\\.\\d+)";
-	private static final String resultRegexString = "\\{(.+),(.+),(" + doubleRegexString + "|" + "-" + "),(\\d+)\\}";
+	private static final String resultRegexString = "\\{(.+?),(.+?),(" + doubleRegexString + "|" + "-" + 
+			"),(\\d+)(,(\\d+))?\\}";
 	private static final String entryRegexString = "(\\d+):(" + resultRegexString + ")";
 	private static final Pattern entryRegex = Pattern.compile(entryRegexString);
 	private static final Pattern resultRegex = Pattern.compile(resultRegexString);
@@ -47,6 +48,7 @@ public class Experiment {
 			.compile("Prop:(\\d+)\\{((" + entryRegexString + ";)*" + entryRegexString + ")\\}");
 
 	public static class Result {
+		private Optional<Integer> rounds = Optional.empty();
 		public Result(long totalNrSteps, double probability, Optional<Double> additionalProbEstimation,
 				long runDuration) {
 			super();
@@ -54,10 +56,12 @@ public class Experiment {
 			this.probability = probability;
 			this.additionalProbEstimation = additionalProbEstimation;
 			this.runDuration = runDuration;
+			this.setRounds(Optional.empty());
 		}
 
 		public Result(String resultString) {
 			Matcher m = resultRegex.matcher(resultString);
+//			System.out.println(resultString);
 			if (!m.matches())
 				throw new IllegalArgumentException("illegal syntax");
 			totalNrSteps = Long.parseLong(m.group(1));
@@ -67,12 +71,24 @@ public class Experiment {
 			else
 				additionalProbEstimation = Optional.of(Double.parseDouble(m.group(3)));
 			runDuration = Long.parseLong(m.group(5));
+			if(m.group(7) != null){
+				setRounds(Optional.of(Integer.parseInt(m.group(7))));
+			}
 		}
 
 		@Override
 		public String toString() {
 			return "{" + totalNrSteps + "," + probability + ","
-					+ additionalProbEstimation.map(Object::toString).orElse("-") + "," + runDuration + "}";
+					+ additionalProbEstimation.map(Object::toString).orElse("-") + "," + runDuration + 
+					(getRounds().isPresent() ? "," + getRounds().get().toString() : "") + "}";
+		}
+
+		public Optional<Integer> getRounds() {
+			return rounds;
+		}
+
+		public void setRounds(Optional<Integer> rounds) {
+			this.rounds = rounds;
 		}
 
 		public long totalNrSteps = 0;
@@ -98,6 +114,7 @@ public class Experiment {
 		public ValueSummary<Double> probabilitySummary;
 		public Optional<ValueSummary<Double>> addProbEstimation = Optional.empty();
 		public ValueSummary<Long> runTimeSummary;
+		public Optional<ValueSummary<Integer>> rounds = Optional.empty();
 	}
 
 	private long[] seeds = null;
@@ -120,43 +137,66 @@ public class Experiment {
 		this.experimentName = experimentName;
 	}
 
-
-	public BoxData getBoxplotData(int prop,boolean simulated) {
+	public BoxData getBoxplotData(int prop, boolean simulated) {
 		Map<Long, Result> propResults = results.get(prop);
-		
+
 		List<Double> probs = null;
-		if(simulated)
+		if (simulated)
 			probs = propResults.values().stream().map(r -> r.probability).collect(Collectors.toList());
-		else 
-			probs = propResults.values().stream().flatMap(r -> r.additionalProbEstimation.isPresent()
-				? Stream.of(r.additionalProbEstimation.get()) : Stream.empty()).collect(Collectors.toList());
+		else
+			probs = propResults.values()
+					.stream().flatMap(r -> r.additionalProbEstimation.isPresent()
+							? Stream.of(r.additionalProbEstimation.get()) : Stream.empty())
+					.collect(Collectors.toList());
 		Collections.sort(probs);
 		double middle = median(probs);
 		double lowerBorder = quantile(probs, 0.25);
 		double upperBorder = quantile(probs, 0.75);
-		double iqr = upperBorder - lowerBorder;
-		double lowerWhisker = 0; 
-		int minIndex = 0;
-		do{
-			lowerWhisker = probs.get(minIndex);
-			if(lowerWhisker >= lowerBorder - 1.5*iqr)
-				break;
-			minIndex ++;
-		}while(true);
-		double upperWhisker = 0; 
-		int maxIndex = probs.size()-1;
-		do{
-			upperWhisker = probs.get(maxIndex);
-			if(upperWhisker <= upperBorder + 1.5*iqr)
-				break;
-			maxIndex--;
-		}while(true);
+		double iqr = iqr(lowerBorder, upperBorder);
+		double lowerWhisker = lowerWhisker(probs, lowerBorder, iqr);
+		double upperWhisker = upperWhisker(probs, upperBorder, iqr);
 		final double lowerWhiskerFinal = lowerWhisker;
 		final double upperWhiskerFinal = upperWhisker;
-		List<Double> outliers = probs.stream().filter(p -> p < lowerWhiskerFinal
-				|| p > upperWhiskerFinal).collect(Collectors.toList());
-		return new BoxData(middle, lowerBorder, upperBorder, lowerWhisker, upperWhisker, outliers); // new BoxData();
+		List<Double> outliers = outliers(probs, lowerWhiskerFinal, upperWhiskerFinal);
+		return new BoxData(middle, lowerBorder, upperBorder, lowerWhisker, upperWhisker, outliers); // new
+																									// BoxData();
 	}
+
+	public static List<Double> outliers(List<Double> probs, final double lowerWhiskerFinal, final double upperWhiskerFinal) {
+		List<Double> outliers = probs.stream().filter(p -> p < lowerWhiskerFinal || p > upperWhiskerFinal)
+				.collect(Collectors.toList());
+		return outliers;
+	}
+
+	public static double upperWhisker(List<Double> probs, double upperBorder, double iqr) {
+		double upperWhisker = 0;
+		int maxIndex = probs.size() - 1;
+		do {
+			upperWhisker = probs.get(maxIndex);
+			if (upperWhisker <= upperBorder + 1.5 * iqr)
+				break;
+			maxIndex--;
+		} while (true);
+		return upperWhisker;
+	}
+
+	public static double iqr(double lowerBorder, double upperBorder) {
+		double iqr = upperBorder - lowerBorder;
+		return iqr;
+	}
+
+	public static double lowerWhisker(List<Double> probs, double lowerBorder, double iqr) {
+		double lowerWhisker = 0;
+		int minIndex = 0;
+		do {
+			lowerWhisker = probs.get(minIndex);
+			if (lowerWhisker >= lowerBorder - 1.5 * iqr)
+				break;
+			minIndex++;
+		} while (true);
+		return lowerWhisker;
+	}
+
 	public Map<Integer, ResultSummary> getResultSummaries() {
 		Map<Integer, ResultSummary> summaries = new HashMap<>();
 		for (Integer prop : results.keySet())
@@ -173,6 +213,9 @@ public class Experiment {
 		List<Double> probabilities = propResults.values().stream().map(r -> r.probability).collect(Collectors.toList());
 		List<Double> addProbalities = propResults.values().stream().flatMap(r -> r.additionalProbEstimation.isPresent()
 				? Stream.of(r.additionalProbEstimation.get()) : Stream.empty()).collect(Collectors.toList());
+
+		List<Integer> rounds = propResults.values().stream().flatMap(r -> r.rounds.isPresent()
+				? Stream.of(r.rounds.get()) : Stream.empty()).collect(Collectors.toList());
 
 		ValueSummary<Long> stepsSummary = new ValueSummary<>();
 		stepsSummary.values = steps;
@@ -216,6 +259,19 @@ public class Experiment {
 			addProbSummary.thirdQuartile = quantile(addProbalities, 0.75);
 			summary.addProbEstimation = Optional.of(addProbSummary);
 		}
+		
+		if (!rounds.isEmpty()) {
+			ValueSummary<Integer> roundsSummary = new ValueSummary<>();
+			roundsSummary.values = rounds;
+			roundsSummary.mean = mean(rounds);
+			roundsSummary.median = median(rounds);
+			roundsSummary.stdDeviation = stdDeviation(rounds, roundsSummary.mean);
+			roundsSummary.min = min(rounds);
+			roundsSummary.max = max(rounds);
+			roundsSummary.firstQuartile = quantile(rounds, 0.25);
+			roundsSummary.thirdQuartile = quantile(rounds, 0.75);
+			summary.rounds = Optional.of(roundsSummary);
+		}
 
 		summary.probabilitySummary = probabilitiesSummary;
 		summary.stepsSummary = stepsSummary;
@@ -223,16 +279,19 @@ public class Experiment {
 		return summary;
 	}
 
-	private <T extends Number & Comparable<? super T>> double quantile(List<T> elems, double p) {
+	public static <T extends Number & Comparable<? super T>> double quantile(List<T> elems, double p) {
 
-//	      g <- (length(x)-1)*p - floor((length(x)-1)*p)
-//	      indexBefore <- floor((length(x)-1)*p)
-//	      return ((1-g) * sort(x)[indexBefore+1]+ g*sort(x)[indexBefore + 2])
+		// g <- (length(x)-1)*p - floor((length(x)-1)*p)
+		// indexBefore <- floor((length(x)-1)*p)
+		// return ((1-g) * sort(x)[indexBefore+1]+ g*sort(x)[indexBefore + 2])
+		if (elems.size() == 1)
+			return elems.get(0).doubleValue();
 		List<T> copy = new ArrayList<>(elems);
 		Collections.sort(copy);
-		double g = (copy.size()-1) * p - Math.floor((copy.size()-1)*p);
-		int index = (int)Math.floor((copy.size()-1)*p);
-		double result = (1-g) * copy.get(index + 1).doubleValue() + g*copy.get(index + 2).doubleValue();
+		double g = (copy.size() - 1) * p - Math.floor((copy.size() - 1) * p);
+		int index = (int) Math.floor((copy.size() - 1) * p);
+		double result = (1 - g) * copy.get(index + 1).doubleValue()
+				+ g * copy.get(index + 2 >= copy.size() ? copy.size() - 1 : index + 2).doubleValue();
 		return result;
 	}
 
@@ -244,7 +303,7 @@ public class Experiment {
 		return Collections.min(steps);
 	}
 
-	private <T extends Number & Comparable<? super T>> double median(List<T> steps) {
+	public static <T extends Number & Comparable<? super T>> double median(List<T> steps) {
 		List<T> copy = new ArrayList<>(steps);
 		Collections.sort(copy);
 		double result = 0;
@@ -356,7 +415,9 @@ public class Experiment {
 		long totalNrSteps = inferrer.getStrategy().getTotalNrSteps();
 		long runDuration = inferrer.getLastRunDuration();
 		Optional<Double> additionalEstimation = inferrer.getStrategy().getAdditionalProbEstimation();
-		return new Result(totalNrSteps, probability, additionalEstimation, runDuration);
+		Result r = new Result(totalNrSteps, probability, additionalEstimation, runDuration);
+		r.setRounds(Optional.of(inferrer.getExecutedRounds()));
+		return r;
 	}
 
 	public String getExperimentName() {

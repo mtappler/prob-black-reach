@@ -27,26 +27,31 @@ import java.util.stream.Collectors;
 
 public class LabelHeader {
 	private Map<Long, String> idToTextualLabel = new HashMap<>();
+	private Map<String, Long> textualLabelToId = new HashMap<>();
 	private static final int ID = 1;
 	private static final int LABEL_TEXT = 2;
 
 	private static final Pattern mappingPattern = Pattern.compile("(\\d+)=\"(\\w+)\"");
+	private static final Long DUMMY_ID = -1l; // any ID that is not used by PRISM
 
-	public LabelHeader(Map<Long, String> idToTextualLabel) {
+	public LabelHeader(Map<Long, String> idToTextualLabel, Map<String, Long> textualLabelToId) {
 		super();
 		this.idToTextualLabel = idToTextualLabel;
+		this.setTextualLabelToId(textualLabelToId);
 	}
 
 	public static LabelHeader fromString(String textual) {
 		String[] labelMappingStrings = textual.split(" ");
 		Map<Long, String> idToTextualLabel = new HashMap<>();
+		Map<String, Long> textualLabelToId = new HashMap<>();
 		Arrays.stream(labelMappingStrings).forEach(labelMappingStr -> {
 			Matcher matcher = mappingPattern.matcher(labelMappingStr);
 			MatrixExportAdapter.checkMatch(matcher,textual);
 			
 			idToTextualLabel.put(Long.parseLong(matcher.group(ID)), matcher.group(LABEL_TEXT));
+			textualLabelToId.put(matcher.group(LABEL_TEXT), Long.parseLong(matcher.group(ID)));
 		});
-		return new LabelHeader(idToTextualLabel);
+		return new LabelHeader(idToTextualLabel,textualLabelToId);
 	}
 
 	public Map<Long, String> getIdToTextualLabel() {
@@ -61,5 +66,20 @@ public class LabelHeader {
 		return outputLabelIds.stream()
 				.map(labelId -> idToTextualLabel.get(labelId))
 				.collect(Collectors.joining("&"));
+	}
+
+	public Map<String, Long> getTextualLabelToId() {
+		return textualLabelToId;
+	}
+
+	public void setTextualLabelToId(Map<String, Long> textualLabelToId) {
+		this.textualLabelToId = textualLabelToId;
+	}
+
+	public Long getTextualLabelToId(String label) {
+		Long id = textualLabelToId.get(label);
+		if(id == null)
+			return DUMMY_ID;
+		return id;
 	}
 }

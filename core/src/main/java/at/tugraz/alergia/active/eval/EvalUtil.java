@@ -102,6 +102,8 @@ public class EvalUtil {
 		summaryStrings.add(separator());
 		Function<Double, String> doubleMinMaxConverter = (Double d) -> String.format("%." + DOUBLE_PRECISION + "f", d);
 		Function<Long, String> longMinMaxConverter = (Long l) -> String.format("%d", l);
+		Function<Integer, String> intMinMaxConverter = (Integer l) -> String.format("%d", l);
+		
 		summaryStrings.addAll(valueSummaryStrings(resultSummary.map(rs -> rs.probabilitySummary), doubleMinMaxConverter,
 				"Probability"));
 		summaryStrings.add(separator());
@@ -110,6 +112,9 @@ public class EvalUtil {
 		summaryStrings.add(separator());
 		summaryStrings.addAll(valueSummaryStrings(resultSummary.flatMap(rs -> rs.addProbEstimation),
 				doubleMinMaxConverter, "Add. Prob. Est."));
+		summaryStrings.add(separator());
+		summaryStrings.addAll(valueSummaryStrings(resultSummary.flatMap(rs -> rs.rounds),
+				intMinMaxConverter, "Rounds"));
 		summaryStrings.add(separator());
 		summaryStrings
 			.addAll(valueSummaryStrings(resultSummary.map(rs -> rs.runTimeSummary), longMinMaxConverter, "inference duration[ms]:"));
