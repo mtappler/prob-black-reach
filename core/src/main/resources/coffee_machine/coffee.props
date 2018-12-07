@@ -1,0 +1,6 @@
+Pmax=?[F("coffee" & steps<3)]
+
+Pmax=?[F("coffee" & steps<5)]
+
+Pmax=?[F("coffee" & steps<7)]
+

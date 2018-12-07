@@ -25,18 +25,26 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.text.translate.AggregateTranslator;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.math3.distribution.BinomialDistribution;
+import org.apache.commons.math3.util.CombinatoricsUtils;
 
 import at.tugraz.alergia.active.Property;
 import at.tugraz.alergia.active.adapter.Adapter;
 import at.tugraz.alergia.active.strategy.TestStrategy;
+import at.tugraz.alergia.active.strategy.value_iteration.RandomisedAdversary;
+import at.tugraz.alergia.active.strategy.value_iteration.ReachabilityChecker;
 import at.tugraz.alergia.automata.MarkovChain;
 import at.tugraz.alergia.data.FiniteString;
 import at.tugraz.alergia.data.InputOutputStep;
 import at.tugraz.alergia.data.InputSymbol;
+import at.tugraz.alergia.data.OutputSymbol;
 import at.tugraz.alergia.util.export.DotMDPHelper;
 import at.tugraz.alergia.util.export.RMLExporterMDP;
 
@@ -50,14 +58,18 @@ public class AdversaryBasedTestStrategy extends TestStrategy {
 	private int advChoices = 0;
 	private int advAgreeingChoices = 0;
 	private String pathToTmpFiles = "tmp/";
-	private Adversary adversary = null;
-	private Adversary lastAdversary = null;
+	private AdversaryI adversary = null;
+	private AdversaryI lastAdversary = null;
 	private double probRandomSample;
 	private double probRandomChangeFactor;
 	private Property trainingProperty = null;
 	private double initialProbRandomSample;
 	private boolean noAdversary = true;
 	private boolean hybrid = false;
+	private boolean usePrism = true;
+	private Set<InputSymbol> inputs = null;
+
+	private Random fileNameRand = new Random(System.currentTimeMillis());
 	public static final Pattern PRISM_PROB_CALC = Pattern
 			.compile("Value in the initial state: (1\\.\\d+|1|0\\.0|0|0\\.\\d+|\\d\\.\\d+E-\\d)");
 
@@ -75,18 +87,35 @@ public class AdversaryBasedTestStrategy extends TestStrategy {
 	@Override
 	public void update(MarkovChain<InputOutputStep> mdp) throws Exception {
 		round++;
-		String learnedModelFileName = createTempFile(mdp);
-		String advFileName = String.format("%sadv_%d.tra", pathToTmpFiles, round);
-		String concreteModelName = String.format("%sout_%d", pathToTmpFiles, round);
-		String trainingPropertyString = trainingProperty.toString();
-		String prismCall = String.format("%s %s -pf %s -noprob1 -exportadvmdp %s -exportmodel %s.all", pathToPrism,
-				learnedModelFileName, trainingPropertyString, advFileName, concreteModelName);
-		callPrism(prismCall);
-		if (!noAdversary) {
-			lastAdversary = adversary;
-			readAdvFile(advFileName, concreteModelName);
-		} else
-			System.out.println("Warning: no adversary created!");
+		if(isUsePrism()){
+			String learnedModelFileName = createTempFile(mdp);
+			int randomiser = fileNameRand.nextInt(Integer.MAX_VALUE);
+			String advFileName = String.format("%sadv_%d_%d.tra", pathToTmpFiles,randomiser, round);
+			String concreteModelName = String.format("%sout_%d_%d", pathToTmpFiles,randomiser, round);
+			String trainingPropertyString = trainingProperty.toString();
+			String prismCall = String.format("%s %s -pf %s -noprob1 -exportadvmdp %s -exportmodel %s.all", pathToPrism,
+					learnedModelFileName, trainingPropertyString, advFileName, concreteModelName);
+			callPrism(prismCall);
+
+			if (!noAdversary) {
+				lastAdversary = adversary;
+				readAdvFile(advFileName, concreteModelName);
+			} else
+				System.out.println("Warning: no adversary created!");
+		} else {
+			System.out.println("ROUND " + round);
+			System.out.println("---------------");
+			ReachabilityChecker reachChecker = new ReachabilityChecker(mdp, trainingProperty, getInputs());
+			Pair<Double, AdversaryI> result = reachChecker.computeReachability();
+			System.out.println("Value in the initial state: " + result.getLeft());
+			additionalProbEstimation = Optional.of(result.getLeft());
+			noAdversary = result.getRight() instanceof RandomisedAdversary;
+			if (!noAdversary) {
+				lastAdversary = adversary;
+			} else
+				System.out.println("Warning: no adversary created!");
+			adversary = result.getRight();
+		}
 	}
 
 	private void readAdvFile(String advFileName, String concreteModelName) throws IOException {
@@ -248,6 +277,7 @@ public class AdversaryBasedTestStrategy extends TestStrategy {
 		double alpha = 1 - confidence;
 		double p_0 = 1 - threshhold;
 		if (s_n <= n * p_0){
+			System.out.println("FIRST");
 			return false;
 		}
 		double p_val1 = 2 * binomialDist(p_0, n, s_n);
@@ -257,8 +287,10 @@ public class AdversaryBasedTestStrategy extends TestStrategy {
 		
 		double p = Math.min(p_val1, p_val2);
 		if (p / 2 <= alpha){
+			System.out.println("SECOND");
 			return true;
 		}else{
+			System.out.println("THIRD");
 			return false;
 		}
 	}
@@ -275,6 +307,22 @@ public class AdversaryBasedTestStrategy extends TestStrategy {
 
 	public void setHybrid(boolean b) {
 		this.hybrid = b;
+	}
+
+	public Set<InputSymbol> getInputs() {
+		return inputs;
+	}
+
+	public void setInputs(Set<InputSymbol> inputs) {
+		this.inputs = inputs;
+	}
+
+	public boolean isUsePrism() {
+		return usePrism;
+	}
+
+	public void setUsePrism(boolean usePrism) {
+		this.usePrism = usePrism;
 	}
 
 }

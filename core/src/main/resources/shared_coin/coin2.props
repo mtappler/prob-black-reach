@@ -1,0 +1,16 @@
+Pmax=? [ F ("finished"&steps<20) ]
+
+Pmax=? [ F ("finished"&steps<15) ]
+
+Pmax=? [ F ("deadlock") ]
+
+Pmax=? [ F ("finished"&steps<30) ]
+
+Pmax=? [ F ("five"&steps<5) ]
+
+Pmax=? [ F ("finished"&steps<14) ]
+
+Pmax=? [ F ("finished"&steps<28) ]
+
+Pmax=? [ F ("finished"&steps<17) ]
+

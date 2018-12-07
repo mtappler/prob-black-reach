@@ -17,7 +17,10 @@
  *******************************************************************************/
 package at.tugraz.alergia.active.eval;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import at.tugraz.alergia.active.ActiveTestingStrategyInference;
@@ -47,6 +50,39 @@ public class EvalSlotR3 {
 		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
 				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
 
+		Set<InputSymbol> inputSet = new HashSet<>(Arrays.asList(inputs));
+		testStrategy.setInputs(inputSet);
+		testStrategy.setUsePrism(false);
+		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
+		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
+	}
+	public static ActiveTestingStrategyInference incrementalSlowerMoreRounds(Adapter adapter, InputSymbol[] inputs,
+			String prismLocation) {
+		double probRandomSample = 0.75;
+		double probRandomSampleChangeFactor = 0.975;
+		int nrRounds = 240;
+		int batchSize = 125;
+		long initialSeed = 0;
+		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
+				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
+		testStrategy.setUsePrism(false);
+		Set<InputSymbol> inputSet = new HashSet<>(Arrays.asList(inputs));
+		testStrategy.setInputs(inputSet);
+		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
+		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
+	}
+	public static ActiveTestingStrategyInference incrementalSlowerMoreRoundsPrism(Adapter adapter, InputSymbol[] inputs,
+			String prismLocation) {
+		double probRandomSample = 0.75;
+		double probRandomSampleChangeFactor = 0.975;
+		int nrRounds = 240;
+		int batchSize = 125;
+		long initialSeed = 0;
+		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
+				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
+		testStrategy.setUsePrism(true);
+		Set<InputSymbol> inputSet = new HashSet<>(Arrays.asList(inputs));
+		testStrategy.setInputs(inputSet);
 		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
 		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
 	}
@@ -54,13 +90,14 @@ public class EvalSlotR3 {
 			String prismLocation) {
 		double probRandomSample = 0.75;
 		double probRandomSampleChangeFactor = 0.975;
-		int nrRounds = 60;
-		int batchSize = 250;
+		int nrRounds = 120;
+		int batchSize = 125;
 		long initialSeed = 0;
-
 		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
 				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
-
+		testStrategy.setUsePrism(false);
+		Set<InputSymbol> inputSet = new HashSet<>(Arrays.asList(inputs));
+		testStrategy.setInputs(inputSet);
 		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
 		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
 	}
@@ -74,7 +111,9 @@ public class EvalSlotR3 {
 
 		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
 				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
-
+		Set<InputSymbol> inputSet = new HashSet<>(Arrays.asList(inputs));
+		testStrategy.setInputs(inputSet);
+		testStrategy.setUsePrism(false);
 		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
 		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
 	}
@@ -126,32 +165,37 @@ public class EvalSlotR3 {
 		String prismFile = "src/main/resources/slot_machine_step_count/slot_machine.prism";	
 		String propertiesFile = "src/main/resources/slot_machine_step_count/slot_machine_full.props";
 		
-		int[] properties = new int[]{56,55,54,53,45,41,39};
-		String path = "log/logr3";
-		Experiment baseline = new Experiment(path,baseline(adapter, inputs, prismLocation), adapter, seeds, propertiesFile,
-				"baseline", properties);
-		baseline.run();
-		Experiment monolithicExperiment = new Experiment(path,monolithic(adapter, inputs, prismLocation), adapter, seeds,
-				propertiesFile, "monolithic", properties);
-		monolithicExperiment.run();
-//
-		Experiment monolithicLargeExperiment = new Experiment(path,monolithicLarge(adapter, inputs, prismLocation), adapter, seeds,
-				propertiesFile, "monolithic-large", properties);
-		monolithicLargeExperiment.run();
+		int[] properties = new int[]{58,59,60};
+		String path = "log/logr3/my_impl";
+//		Experiment baseline = new Experiment(path,baseline(adapter, inputs, prismLocation), adapter, seeds, propertiesFile,
+//				"baseline", properties);
+//		baseline.run();
+//		Experiment monolithicExperiment = new Experiment(path,monolithic(adapter, inputs, prismLocation), adapter, seeds,
+//				propertiesFile, "monolithic", properties);
+//		monolithicExperiment.run();
+////
+//		Experiment monolithicLargeExperiment = new Experiment(path,monolithicLarge(adapter, inputs, prismLocation), adapter, seeds,
+//				propertiesFile, "monolithic-large", properties);
+//		monolithicLargeExperiment.run();
 
 		Experiment incrementalExperiment = new Experiment(path,incremental(adapter, inputs, prismLocation), adapter, seeds,
 				propertiesFile, "incremental", properties);
-		incrementalExperiment.run();
+//		incrementalExperiment.run();
 
-		Experiment incrementalSlow = new Experiment(path,incrementalSlow(adapter, inputs, prismLocation), adapter, seeds,
-				propertiesFile, "incremental-slow", properties);
-		incrementalSlow.run();
+//		Experiment incrementalSlow = new Experiment(path,incrementalSlow(adapter, inputs, prismLocation), adapter, seeds,
+//				propertiesFile, "incremental-slow", properties);
+//		incrementalSlow.run();
 		Experiment incrementalSlowerExperiment = new Experiment(path,incrementalSlower(adapter, inputs, prismLocation), adapter, seeds,
 				propertiesFile, "incremental-slower", properties);
 		incrementalSlowerExperiment.run();
-
-		EvalUtil.printSummaries(prismLocation,prismFile, propertiesFile, monolithicExperiment, monolithicLargeExperiment,
-				incrementalSlow,incrementalSlowerExperiment, incrementalExperiment,baseline);
+		Experiment moreRounds = new Experiment(path,incrementalSlowerMoreRounds(adapter, inputs, prismLocation), adapter, seeds,
+				propertiesFile, "more-rounds", properties);
+		moreRounds.run();
+		Experiment moreRoundsPrism = new Experiment(path,incrementalSlowerMoreRoundsPrism(adapter, inputs, prismLocation), adapter, seeds,
+				propertiesFile, "more-rounds-prism", properties);
+//		moreRoundsPrism.run();
+		EvalUtil.printSummaries(prismLocation,prismFile, propertiesFile, incrementalExperiment,
+				incrementalSlowerExperiment,moreRounds,moreRoundsPrism);
 	}
 
 }

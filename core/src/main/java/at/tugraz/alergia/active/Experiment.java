@@ -32,6 +32,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import at.tugraz.alergia.active.adapter.Adapter;
 import at.tugraz.alergia.active.eval.BoxData;
 
@@ -39,7 +42,7 @@ public class Experiment {
 
 	private static final String doubleRegexString = "(1\\.0|1|0\\.0|0|0\\.\\d+)";
 	private static final String resultRegexString = "\\{(.+?),(.+?),(" + doubleRegexString + "|" + "-" + 
-			"),(\\d+)(,(\\d+))?\\}";
+			"),(\\d+),(\\d+)(,(\\d+-\\d+))?\\}";
 	private static final String entryRegexString = "(\\d+):(" + resultRegexString + ")";
 	private static final Pattern entryRegex = Pattern.compile(entryRegexString);
 	private static final Pattern resultRegex = Pattern.compile(resultRegexString);
@@ -48,7 +51,7 @@ public class Experiment {
 			.compile("Prop:(\\d+)\\{((" + entryRegexString + ";)*" + entryRegexString + ")\\}");
 
 	public static class Result {
-		private Optional<Integer> rounds = Optional.empty();
+		private Integer rounds = 0;
 		public Result(long totalNrSteps, double probability, Optional<Double> additionalProbEstimation,
 				long runDuration) {
 			super();
@@ -56,7 +59,7 @@ public class Experiment {
 			this.probability = probability;
 			this.additionalProbEstimation = additionalProbEstimation;
 			this.runDuration = runDuration;
-			this.setRounds(Optional.empty());
+			this.rounds = 0;
 		}
 
 		public Result(String resultString) {
@@ -71,30 +74,38 @@ public class Experiment {
 			else
 				additionalProbEstimation = Optional.of(Double.parseDouble(m.group(3)));
 			runDuration = Long.parseLong(m.group(5));
-			if(m.group(7) != null){
-				setRounds(Optional.of(Integer.parseInt(m.group(7))));
+			rounds = Integer.parseInt(m.group(6));
+			if(m.group(8)!=null){
+				additionalDurations = parseAdditionalDurations(m.group(8));
 			}
+		}
+
+		private Optional<Pair<Long, Long>> parseAdditionalDurations(String durStrings) {
+			String[] split = durStrings.trim().split("-");
+			long lastLearnDuration = Long.parseLong(split[0]);
+			long lastStratUpdateDuration = Long.parseLong(split[1]);
+			return Optional.of(ImmutablePair.of(lastLearnDuration, lastStratUpdateDuration));
 		}
 
 		@Override
 		public String toString() {
 			return "{" + totalNrSteps + "," + probability + ","
 					+ additionalProbEstimation.map(Object::toString).orElse("-") + "," + runDuration + 
-					(getRounds().isPresent() ? "," + getRounds().get().toString() : "") + "}";
-		}
-
-		public Optional<Integer> getRounds() {
-			return rounds;
-		}
-
-		public void setRounds(Optional<Integer> rounds) {
-			this.rounds = rounds;
+					 "," + rounds + 
+					 (additionalDurations.isPresent() ? 
+							 "," + additionalDurations.get().getLeft() + "-" + additionalDurations.get().getRight()
+							 	: "") +
+					 "}";
 		}
 
 		public long totalNrSteps = 0;
 		public double probability = 0;
 		public Optional<Double> additionalProbEstimation = null;
 		public long runDuration = 0;
+		public Optional<Pair<Long,Long>> additionalDurations = Optional.empty();
+		public void setAdditionalDurations(long lastLearnDuration, long lastStratUpdateDuration) {
+			additionalDurations = Optional.of(ImmutablePair.of(lastLearnDuration, lastStratUpdateDuration));
+		}
 	}
 
 	public static class ValueSummary<T> {
@@ -115,6 +126,8 @@ public class Experiment {
 		public Optional<ValueSummary<Double>> addProbEstimation = Optional.empty();
 		public ValueSummary<Long> runTimeSummary;
 		public Optional<ValueSummary<Integer>> rounds = Optional.empty();
+		public Optional<ValueSummary<Long>> stratUpdateDuration = Optional.empty();
+		public Optional<ValueSummary<Long>> learnDuration = Optional.empty();
 	}
 
 	private long[] seeds = null;
@@ -214,8 +227,11 @@ public class Experiment {
 		List<Double> addProbalities = propResults.values().stream().flatMap(r -> r.additionalProbEstimation.isPresent()
 				? Stream.of(r.additionalProbEstimation.get()) : Stream.empty()).collect(Collectors.toList());
 
-		List<Integer> rounds = propResults.values().stream().flatMap(r -> r.rounds.isPresent()
-				? Stream.of(r.rounds.get()) : Stream.empty()).collect(Collectors.toList());
+		List<Integer> rounds = propResults.values().stream().map(r -> r.rounds).collect(Collectors.toList());
+
+		List<Pair<Long,Long>> addDurations = propResults.values().stream().flatMap(r -> 
+			r.additionalDurations.isPresent()
+				? Stream.of(r.additionalDurations.get()) : Stream.empty()).collect(Collectors.toList());
 
 		ValueSummary<Long> stepsSummary = new ValueSummary<>();
 		stepsSummary.values = steps;
@@ -271,6 +287,31 @@ public class Experiment {
 			roundsSummary.firstQuartile = quantile(rounds, 0.25);
 			roundsSummary.thirdQuartile = quantile(rounds, 0.75);
 			summary.rounds = Optional.of(roundsSummary);
+		} 
+		if(!addDurations.isEmpty()){
+			List<Long> learnDurations = addDurations.stream().map(Pair::getLeft).collect(Collectors.toList());
+			ValueSummary<Long> learnDurationSummary = new ValueSummary<>();
+			learnDurationSummary.values = learnDurations;
+			learnDurationSummary.mean = mean(learnDurations);
+			learnDurationSummary.median = median(learnDurations);
+			learnDurationSummary.stdDeviation = stdDeviation(rounds, learnDurationSummary.mean);
+			learnDurationSummary.min = min(learnDurations);
+			learnDurationSummary.max = max(learnDurations);
+			learnDurationSummary.firstQuartile = quantile(learnDurations, 0.25);
+			learnDurationSummary.thirdQuartile = quantile(learnDurations, 0.75);
+			summary.learnDuration = Optional.of(learnDurationSummary);
+			
+			List<Long> stratUpdateDurations = addDurations.stream().map(Pair::getRight).collect(Collectors.toList());
+			ValueSummary<Long> stratUpdateDurationSummary = new ValueSummary<>();
+			stratUpdateDurationSummary.values = stratUpdateDurations;
+			stratUpdateDurationSummary.mean = mean(stratUpdateDurations);
+			stratUpdateDurationSummary.median = median(stratUpdateDurations);
+			stratUpdateDurationSummary.stdDeviation = stdDeviation(rounds, stratUpdateDurationSummary.mean);
+			stratUpdateDurationSummary.min = min(stratUpdateDurations);
+			stratUpdateDurationSummary.max = max(stratUpdateDurations);
+			stratUpdateDurationSummary.firstQuartile = quantile(stratUpdateDurations, 0.25);
+			stratUpdateDurationSummary.thirdQuartile = quantile(stratUpdateDurations, 0.75);
+			summary.stratUpdateDuration = Optional.of(stratUpdateDurationSummary);
 		}
 
 		summary.probabilitySummary = probabilitiesSummary;
@@ -416,7 +457,8 @@ public class Experiment {
 		long runDuration = inferrer.getLastRunDuration();
 		Optional<Double> additionalEstimation = inferrer.getStrategy().getAdditionalProbEstimation();
 		Result r = new Result(totalNrSteps, probability, additionalEstimation, runDuration);
-		r.setRounds(Optional.of(inferrer.getExecutedRounds()));
+		r.rounds = inferrer.getExecutedRounds();
+		r.setAdditionalDurations(inferrer.getLastLearnDuration(),inferrer.getLastStratUpdateDuration());
 		return r;
 	}
 

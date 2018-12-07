@@ -1,0 +1,4 @@
+Pmax=? [ F ("goal"&steps<10) ]
+
+Pmax=? [ F ("goal"&steps<11) ]
+

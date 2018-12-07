@@ -117,8 +117,12 @@ public class RoundEvaluationsExporter {
 	}
 
 	public static void main(String[] args) throws IOException {
-		String file = "/home/mtappler/Arbeit/Dependable_IoT/repos/"
-				+ "dependableThingsSP3/development/active_alergia/parent/core/log/eval_each_round/log_first_gridworld_d10_more_rounds.log";
+//		String file = "/home/mtappler/Arbeit/Dependable_IoT/repos/"
+//				+ "dependableThingsSP3/development/active_alergia/parent/core/log/eval_each_round/"
+//				+ "log_first_gridworld_d10_more_rounds.log";
+		String file = 
+				"/home/mtappler/Arbeit/Dependable_IoT/repos/dependableThingsSP3/development/"
+				+ "active_alergia/parent/core/log_journal/eval_each_round/logr5_pr10_d14_200_rounds.log";
 		RoundEvaluationsExporter export = new RoundEvaluationsExporter(file);
 		System.out.println(export.createBoxGraph());
 	}

@@ -55,6 +55,35 @@ public class EvalEmqttTwoClient {
 		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
 		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
 	}
+	public static ActiveTestingStrategyInference hybrid(Adapter adapter, InputSymbol[] inputs,
+			String prismLocation) {
+		double probRandomSample = 0.75;
+		double probRandomSampleChangeFactor = 0.95;
+		int nrRounds = ROUNDS * 2;
+		int batchSize = BASE_BATCH_SIZE / 4;
+		long initialSeed = 0;
+
+		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
+				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
+
+		testStrategy.setHybrid(true);
+		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
+		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
+	}
+	public static ActiveTestingStrategyInference incrementalSlowSmallBatch(Adapter adapter, InputSymbol[] inputs,
+			String prismLocation) {
+		double probRandomSample = 0.75;
+		double probRandomSampleChangeFactor = 0.95;
+		int nrRounds = ROUNDS * 10;
+		int batchSize = BASE_BATCH_SIZE / 20;
+		long initialSeed = 0;
+
+		AdversaryBasedTestStrategy testStrategy = new AdversaryBasedTestStrategy(adapter, STEP_BOUND, batchSize,
+				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
+
+		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
+		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
+	}
 
 	public static ActiveTestingStrategyInference incremental(Adapter adapter, InputSymbol[] inputs,
 			String prismLocation) {
@@ -68,6 +97,7 @@ public class EvalEmqttTwoClient {
 				initialSeed, STOP_PROBABILITY, inputs, probRandomSample, probRandomSampleChangeFactor, prismLocation);
 
 		testStrategy.setAlternativeStoppingCriterion(alternativeStoppingCriterion);
+	
 		return new ActiveTestingStrategyInference(nrRounds, testStrategy);
 	}
 
@@ -138,15 +168,19 @@ public class EvalEmqttTwoClient {
 		Experiment incrementalSlowExperiment = new Experiment(path, incrementalSlow(adapter, inputs, prismLocation),
 				adapter, seeds, propertiesFile, "incremental-slow", properties);
 		incrementalSlowExperiment.run();
+		
+		Experiment hybridExperiment = new Experiment(path, hybrid(adapter, inputs, prismLocation),
+				adapter, seeds, propertiesFile, "hybrid", properties);
+		hybridExperiment.run();
 
 		EvalUtil.printSummaries(prismLocation, prismFile, propertiesFile, monolithicExperiment,
-				incrementalSlowExperiment, baseline);
+				incrementalSlowExperiment,hybridExperiment, baseline);
 		BoxplotExporter exporter = new BoxplotExporter(true, prismLocation, prismFile, propertiesFile);
-		List<Experiment> experiments = Arrays.asList(incrementalSlowExperiment,monolithicExperiment, baseline);
+		List<Experiment> experiments = Arrays.asList(hybridExperiment,incrementalSlowExperiment,monolithicExperiment, baseline);
 		List<String> colours = Arrays.asList("black","blue","red");
 		List<Integer> boxProperties = Arrays.asList(5,6,7,4,8);
 		List<Integer> stepBounds = Arrays.asList(5,8,11,14,17);
-		System.out.println(exporter.export(stepBounds,boxProperties, experiments, colours));
+//		System.out.println(exporter.export(stepBounds,boxProperties, experiments, colours));
 	}
 
 }

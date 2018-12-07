@@ -35,7 +35,7 @@ import at.tugraz.alergia.active.adapter.prism_matrix_export.StateLabels;
 import at.tugraz.alergia.active.adapter.prism_matrix_export.Transition;
 import at.tugraz.alergia.active.adapter.prism_matrix_export.TransitionHeader;
 
-public class Adversary {
+public class Adversary implements AdversaryI {
 	Map<Long, State> states = null;
 	Map<Long, Set<Transition>> concMTransitions = null;
 	LabelHeader labelHeader = null;
@@ -64,12 +64,20 @@ public class Adversary {
 		initState = importer.findInitState(true, labelHeader, labels, states);
 	}
 
+	/* (non-Javadoc)
+	 * @see at.tugraz.alergia.active.strategy.adversary.AdversaryI#reset()
+	 */
+	@Override
 	public void reset() {
 		currentState = initState;
 		nrSteps = 0;
 		chaos = false;
 	}
 
+	/* (non-Javadoc)
+	 * @see at.tugraz.alergia.active.strategy.adversary.AdversaryI#executeStep(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public void executeStep(String input, String output) {
 		if (chaos)
 			return;
@@ -94,6 +102,10 @@ public class Adversary {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see at.tugraz.alergia.active.strategy.adversary.AdversaryI#optimalInput()
+	 */
+	@Override
 	public Optional<String> optimalInput() {
 		if (chaos)
 			return Optional.empty();

@@ -1,0 +1,33 @@
+mdp
+
+const int BOUND = 10;
+
+module CoffeeMachine
+
+  q : [0..2] init 0; 
+
+  [but] q = 0 -> 1: (q'=0);
+  [but] q = 1 -> 0.2: (q'=0) + 0.8: (q'=2);
+  [but] q = 2 -> 1: (q'=0);
+  
+  [coin] q = 0 -> 1: (q'=1);
+  [coin] q = 1 -> 1: (q'=1);
+  [coin] q = 2 -> 1: (q'=1);
+
+endmodule
+
+module StepCounter
+
+  steps : [0..BOUND] init 0; // must be higher than bound in formulas
+  [but] true -> 1: (steps'=min(BOUND,steps + 1));
+  [coin] true -> 1: (steps'=min(BOUND,steps + 1));
+endmodule
+
+label "initial"  = q=0;
+
+label "beep" = q=1;
+
+label "coffee" = q=2;
+
+
+

@@ -19,6 +19,7 @@ package at.tugraz.alergia.active;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import at.tugraz.alergia.Alergia;
 import at.tugraz.alergia.active.strategy.TestStrategy;
@@ -34,7 +35,7 @@ import at.tugraz.alergia.util.export.DotMDPHelper;
 
 public class ActiveTestingStrategyInference {
 	private static final double EPSILON_FACTOR = 100.0;
-	private static final double DEFAULT_EPS_LEARNING = Math.pow(10, -6);
+	private static final double DEFAULT_EPS_LEARNING = 0.5; 
 	private int maxNrRounds = -1;
 	private Alergia<InputOutputStep> alergia = null;
 	private McStateFactory<InputOutputStep> stateFactory = new MdpStateFactory();
@@ -44,12 +45,16 @@ public class ActiveTestingStrategyInference {
 	private double errorEpsilon = 0.01;
 	private double confidenceDelta = 0.01;
 	private long lastRunDuration = 0;
+	private long lastStratUpdateDuration = 0;
+	private long lastLearnDuration = 0;
 	private int convergenceRounds = 3; // 10 for emqtt, 5 for TCP
 	private double convergenceDelta = 0.01; // 0.01 for emqtt
 	private double z_alpha = 2.5758;
 	private double convergenceConfidence = 0.99;
 	private boolean evalEachRound = false;
 	private List<Double> evaluations = new ArrayList<>();
+
+	private boolean useAdaptiveEpsilon = false;
 
 	private boolean convergenceCheck = false;
 	private Integer executedRounds = -1;
@@ -121,18 +126,23 @@ public class ActiveTestingStrategyInference {
 
 		boolean verbose = "true".equals(System.getProperty("verbose"));
 		int currentlyConvergingRounds = 0;
-
+		lastLearnDuration = 0;
+		lastStratUpdateDuration = 0;
 		for (round = 0; round < maxNrRounds; round++) {
 			List<FiniteString<InputOutputStep>> currSample = strategy.sample();
 			sample.addAll(currSample);
+			long learnStart = System.currentTimeMillis();
 			MarkovChain<InputOutputStep> mdp = learn(sample);
+			lastLearnDuration += (System.currentTimeMillis() - learnStart);
 			if (verbose) {
 				DotMDPHelper dotexporter = new DotMDPHelper();
 				// quick and dirty for presentation
 				dotexporter.writeToFile(mdp,
 						"hypotheses/hyp_" + strategy.getProperty().getSteps() + "_" + round + ".dot");
 			}
+			long startStrategyUpdate = System.currentTimeMillis();
 			strategy.update(mdp);
+			lastStratUpdateDuration += (System.currentTimeMillis()-startStrategyUpdate);
 			double freqTrueInSample = (double) currSample.stream().filter(t -> strategy.getProperty().evaluate(t))
 					.count() / currSample.size();
 
@@ -204,9 +214,11 @@ public class ActiveTestingStrategyInference {
 	}
 
 	private MarkovChain<InputOutputStep> learn(List<FiniteString<InputOutputStep>> sample) {
-		double epsilon = EPSILON_FACTOR / strategy.getTotalNrSteps();
-		System.out.println("Epsilon: " + epsilon);
-		alergia.setEpsilon(epsilon);
+		if(useAdaptiveEpsilon){
+			double epsilon = EPSILON_FACTOR / strategy.getTotalNrSteps();
+			System.out.println("Epsilon: " + epsilon);
+			alergia.setEpsilon(epsilon);
+		}
 		MarkovChain<InputOutputStep> mc = alergia.runAlergia(sample, stateFactory, nodeFactory);
 		mcTransformer.reNameStateIds(mc);
 		mcTransformer.completeModel(stateFactory, mc);
@@ -291,5 +303,29 @@ public class ActiveTestingStrategyInference {
 
 	public Integer getExecutedRounds() {
 		return executedRounds;
+	}
+
+	public boolean isUseAdaptiveEpsilon() {
+		return useAdaptiveEpsilon;
+	}
+
+	public void setUseAdaptiveEpsilon(boolean useAdaptiveEpsilon) {
+		this.useAdaptiveEpsilon = useAdaptiveEpsilon;
+	}
+
+	public long getLastStratUpdateDuration() {
+		return lastStratUpdateDuration;
+	}
+
+	public void setLastStratUpdateDuration(long lastMcDuration) {
+		this.lastStratUpdateDuration = lastMcDuration;
+	}
+
+	public long getLastLearnDuration() {
+		return lastLearnDuration;
+	}
+
+	public void setLastLearnDuration(long lastLearnDuration) {
+		this.lastLearnDuration = lastLearnDuration;
 	}
 }

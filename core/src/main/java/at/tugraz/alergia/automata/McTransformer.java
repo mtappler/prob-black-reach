@@ -136,7 +136,7 @@ public class McTransformer {
 		if (dontKnowChaos) {
 			McState<InputOutputStep> newState = stateFactory.create(mc.getIdGen().next(), dontKnowLabel, null);
 			chaosStates.put(dontKnowLabel, newState);
-			// TODO refactor, that's not the sweetest software design
+			// TODO refactor, that's not the nicest software design
 			mc.getStates().add(newState);
 
 			for (InputSymbol i : mc.getSampleData().getInputAlphabet()) {
@@ -157,7 +157,7 @@ public class McTransformer {
 				// not be silently ignored
 				McState<InputOutputStep> newState = stateFactory.create(mc.getIdGen().next(), o, null);
 				chaosStates.put(o, newState);
-				// TODO refactor, that's not the sweetest software design
+				// TODO refactor, that's not the nicest software design
 				mc.getStates().add(newState);
 			}
 		}

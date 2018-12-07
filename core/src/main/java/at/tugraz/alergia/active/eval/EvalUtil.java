@@ -42,9 +42,10 @@ import at.tugraz.alergia.active.strategy.adversary.AdversaryBasedTestStrategy;
 public class EvalUtil {
 	public static final int DOUBLE_PRECISION = 3;
 	public static final int SUMMARY_WIDTH = 30;
-	public static final Pattern PROPERTY_CHECK_REGEX = Pattern.compile("Model checking: (Pmax=\\? \\[.+\\])");
+	public static final Pattern PROPERTY_CHECK_REGEX = Pattern.compile("Model checking: (P(max|min)=\\? \\[.+\\])");
 	private boolean includeQuartiles = true;
 
+	
 	public static void printSummaries(String pathToPrism, String prismFile, String propertyFile,
 			Experiment... experiments) throws Exception {
 		Map<String, Map<Integer, ResultSummary>> nameToExperiment = new HashMap<>();
@@ -119,6 +120,13 @@ public class EvalUtil {
 		summaryStrings
 			.addAll(valueSummaryStrings(resultSummary.map(rs -> rs.runTimeSummary), longMinMaxConverter, "inference duration[ms]:"));
 			summaryStrings.add(separator());
+			
+		summaryStrings.addAll(valueSummaryStrings(resultSummary.flatMap(rs -> rs.learnDuration),
+				longMinMaxConverter, "Learn time"));
+		summaryStrings.add(separator());
+		summaryStrings.addAll(valueSummaryStrings(resultSummary.flatMap(rs -> rs.stratUpdateDuration),
+				longMinMaxConverter, "Strategy time"));
+		summaryStrings.add(separator());
 		return summaryStrings;
 	}
 
@@ -169,7 +177,7 @@ public class EvalUtil {
     			Matcher m = PROPERTY_CHECK_REGEX.matcher(line);
     			m.matches();
     			String extractedProp = m.group(1);
-    			propertyString = extractedProp.replace("Pmax=? ", "Pmax");
+    			propertyString = extractedProp.replace("Pmax=? ", "Pmax").replace("Pmin=?", "Pmin");
     		}
 	    }
 	    reader.close();

@@ -43,7 +43,7 @@ public class IOFPTANode extends PTANode<InputOutputStep> {
 	public PTANode<InputOutputStep> addSuccessor(PTANodeFactory<InputOutputStep> factory, InputOutputStep step) {
 		PTANode<InputOutputStep> result = super.addSuccessor(factory, step);
 		if(frequencyForInputCache.containsKey(step.getInput()))
-			frequencyForInputCache.put(step.getInput(), frequencyForInput(step.getInput()));
+			frequencyForInputCache.put(step.getInput(), frequencyForInputCache.get(step.getInput())+1);
 		else
 			frequencyForInputCache.put(step.getInput(), 1);
 		
@@ -56,8 +56,8 @@ public class IOFPTANode extends PTANode<InputOutputStep> {
 		Set<OutputSymbol> outputAlphabet = sampleData.getOutputAlphabet();
 		Set<InputSymbol> inputAlphabet = sampleData.getInputAlphabet();
 		for(InputSymbol i : inputAlphabet){
-			int n_1 = frequencyForInput(i);
-			int n_2 = frequencyForInput(i);
+			int n_1 = this.frequencyForInput(i);
+			int n_2 = ((IOFPTANode)q_b).frequencyForInput(i);
 			if(n_1 == 0 || n_2 == 0)
 				continue; 
 			for(OutputSymbol o : outputAlphabet){

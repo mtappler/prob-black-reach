@@ -19,10 +19,12 @@ package at.tugraz.alergia;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -178,9 +180,9 @@ public class Alergia<S extends Step> {
 			return false;
 		// account for MDPs, succ depends on both input and output
 		for(S step: mc.getSampleData()){
-			PTANode<S> q_rp = succ(q_b,step,factory);
-			PTANode<S> q_bp = succ(q_r,step,factory); 
-			if(!compatible(fpta, q_rp, q_bp, mc,factory,epsilon, depth + 1))
+			PTANode<S> q_bp = succ(q_b,step,factory);
+			PTANode<S> q_rp = succ(q_r,step,factory); 
+			if(!compatible(fpta, q_bp, q_rp, mc,factory,epsilon, depth + 1))
 				return false;
 		}
 		return true;
@@ -196,13 +198,31 @@ public class Alergia<S extends Step> {
 	}
 	// use list to sort states by id (lexicographical minimal elem should be chosen in each iteration 
 	private List<McState<S>> succs(List<McState<S>> red) {
-		return red.stream().flatMap(mcState -> succs(mcState))
-				.filter(s -> Collections.binarySearch(red, s) < 0)
-				.sorted()
-				.collect(Collectors.toList());
+//		return red.stream().flatMap(mcState -> succsState(mcState))
+//				.filter(s -> Collections.binarySearch(red, s) < 0)
+//				.sorted()
+//				.collect(Collectors.toList());
+		Set<McState<S>> redSet = new HashSet<>(red); 
+		Set<McState<S>> resultSet = new HashSet<>();
+//		for(McState<S> r : red){
+//			for(McTransition<S> t : r.getTransitions()){ // inline succsState
+//				if(Collections.binarySearch(red, t.getTarget()) < 0 && 
+//						Collections.binarySearch(result, t.getTarget()) <0)
+//					insertIntoSortedList(result,t.getTarget());
+//			}
+//		}
+		for(McState<S> r : red){
+			for(McTransition<S> t : r.getTransitions()){ // inline succsState
+				if(!redSet.contains(t.getTarget()))
+					resultSet.add(t.getTarget());
+			}
+		}
+		List<McState<S>> result = new ArrayList<>(resultSet);
+		Collections.sort(result);
+		return result;
 	}
 
-	private Stream<McState<S>> succs(McState<S> mcS) {
+	private Stream<McState<S>> succsState(McState<S> mcS) {
 		return mcS.getTransitions().stream().map(McTransition::getTarget);
 		
 	}

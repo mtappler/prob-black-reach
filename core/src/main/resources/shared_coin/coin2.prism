@@ -1,0 +1,118 @@
+// ADAPTED! COIN FLIPPING PROTOCOL FOR POLYNOMIAL RANDOMIZED CONSENSUS [AH90] 
+
+mdp
+
+// constants
+const int N=2;
+const int K=2;
+const int range = 2*(K+1)*N;
+const int counter_init = (K+1)*N;
+const int left = N;
+const int right = 2*(K+1)*N - N;
+const int BOUND = 20;
+
+// shared coin
+// global counter : [0..range] init counter_init;
+
+module process1
+	
+
+	counter : [0..range] init counter_init;
+	// program counter
+	pc1 : [0..3];
+	// 0 - flip
+	// 1 - write 
+	// 2 - check
+	// 3 - finished
+	
+	// local coin
+	coin1 : [0..1];	
+	
+	pc2 : [0..3];
+	coin2 : [0..1];	
+
+	// flip coin
+	[go1] (pc1=0)  -> 0.5 : (coin1'=0) & (pc1'=1) + 0.5 : (coin1'=1) & (pc1'=1);
+	// write tails -1  (DO NOT reset coin to add regularity)
+	[go1] (pc1=1) & (coin1=0) & (counter>0) -> (counter'=counter-1) & (pc1'=2) & (coin1'=0);
+	// write heads +1 (DO NOT reset coin to add regularity)
+	[go1] (pc1=1) & (coin1=1) & (counter<range) -> (counter'=counter+1) & (pc1'=2) & (coin1'=1);
+	
+	// make input enabled (flip coin again)
+	[go1] (pc1=1) & ((coin1=1) & (counter=range) | (coin1=0) & (counter=0)) ->  0.5 : (coin1'=0) + 0.5 : (coin1'=1);
+
+	// check
+	// decide tails
+	[go1] (pc1=2) & (counter<=left) -> (pc1'=3) & (coin1'=0);
+	// decide heads
+	[go1] (pc1=2) & (counter>=right) -> (pc1'=3) & (coin1'=1);
+	// flip again
+	[go1] (pc1=2) & (counter>left) & (counter<right) -> (pc1'=0);
+	// loop (all loop together when done)
+	[go1] (pc1=3) -> (pc1'=3);
+
+	
+	// flip coin
+	[go2] (pc2=0)  -> 0.5 : (coin2'=0) & (pc2'=1) + 0.5 : (coin2'=1) & (pc2'=1);
+	// write tails -1  (DO NOT reset coin to add regularity)
+	[go2] (pc2=1) & (coin2=0) & (counter>0) -> (counter'=counter-1) & (pc2'=2) & (coin2'=0);
+	// write heads +1 (DO NOT reset coin to add regularity)
+	[go2] (pc2=1) & (coin2=1) & (counter<range) -> (counter'=counter+1) & (pc2'=2) & (coin2'=1);
+
+	// make input enabled (flip coin again)
+	[go2] (pc2=1) & ((coin2=1) & (counter=range) | (coin2=0) & (counter=0)) ->  0.5 : (coin2'=0) + 0.5 : (coin2'=1);
+
+	// check
+	// decide tails
+	[go2] (pc2=2) & (counter<=left) -> (pc2'=3) & (coin2'=0);
+	// decide heads
+	[go2] (pc2=2) & (counter>=right) -> (pc2'=3) & (coin2'=1);
+	// flip again
+	[go2] (pc2=2) & (counter>left) & (counter<right) -> (pc2'=0);
+	// loop (all loop together when done)
+	[go2] (pc2=3) -> (pc2'=3);
+
+endmodule
+
+module StepCounter
+
+	steps : [0..BOUND] init 0; 
+	[go1] true -> (steps'=min(BOUND,steps + 1));
+	[go2] true -> (steps'=min(BOUND,steps + 1));
+	
+endmodule
+
+// construct remaining processes through renaming
+// module process2 = process1[pc1=pc2,coin1=coin2] endmodule
+
+// labels
+label "finished" = pc1=3 & pc2=3 ;
+label "agree" = coin1=coin2;
+
+//label "left" = counter<=left;
+//label "middle" = (counter>left) & (counter<right);
+//label "right" = counter>=right;
+label "zero" = counter=0;
+label "one" = counter=1;
+label "two" = counter=2;
+label "three" = counter=3;
+label "four" = counter=4;
+label "five" = counter=5;
+label "six" = counter=6;
+label "seven" = counter=7;
+label "eight" = counter=8;
+label "nine" = counter=9;
+label "ten" = counter=10;
+label "eleven" = counter=11;
+label "twelve" = counter=12;
+
+label "c1_tails" = coin1=0;
+label "c1_heads" = coin1=1;
+label "c2_tails" = coin2=0;
+label "c2_heads" = coin2=1;
+
+label "finish_1" = pc1=3;
+
+label "finish_2" = pc2=3;
+
+
